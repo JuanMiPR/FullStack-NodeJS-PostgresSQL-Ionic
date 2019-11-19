@@ -11,7 +11,7 @@ user_name:{
 user_email:{
     type:Sequelize.TEXT
 },
-user_dni:{
+user_type:{
     type:Sequelize.TEXT
 },
 password:{

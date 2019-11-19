@@ -1,5 +1,5 @@
 import users from "../models/users";
-const jwt = require("jsonwebtoken");
+
 let cryptr = require("cryptr");
 cryptr = new cryptr("devnami");
 
@@ -17,38 +17,7 @@ export async function getUsers(req, res) {
         })
     }
 }
-export async function singinUser(req, res) {
-    
-    let { user_email, password } = req.body;
-    const user = await users.findOne({
-        where: {
-            user_email
-        }
-    });
-    if (user) {
 
-        if (password == cryptr.decrypt(user.password)) {
-            
-            const token = jwt.sign({
-                user_email: user.user_email
-            }, process.env.TOKEN_SECRET);
-           
-            user.update({
-                auth_token:token
-            });
-            res.send(user);
-        } else {
-            res.status(511).json({
-                message: "La contraseña  es incorrecta"
-            })
-        }
-
-    } else {
-        res.status(511).json({
-            message: "El email  es incorrecto"
-        })
-    }
-}
 export async function singoutUser(req, res) {
     const { user_email } = req.params;
     try {
@@ -70,7 +39,7 @@ export async function singoutUser(req, res) {
     }
 }
 export async function createUser(req, res) {
-    let { user_name, user_email, user_dni, password, user_rol } = req.body;
+    let { user_name, user_email,password, user_rol } = req.body;
     const user = await users.findOne({
         where: {
             user_email
@@ -87,13 +56,13 @@ export async function createUser(req, res) {
         try {
             let newUser = await users.create({
                 user_name,
-                user_dni,
+                
                 password,
                 user_rol,
                 user_email
 
             }, {
-                fields: ['user_name', "user_dni", "user_email", "password", "user_rol"]
+                fields: ['user_name',  "user_email", "password", "user_rol"]
             });
             if (newUser) {
                 res.json({
@@ -118,7 +87,8 @@ export async function getUserById(req, res) {
             where: {
                 user_email
             }
-        })
+        });
+        console.log(user);
         res.json({
             data: user
         });
@@ -153,6 +123,7 @@ export async function updateUserById(req, res) {
             user_email
         }
     })
+    
 
     if (user != null) {
         user.update({
