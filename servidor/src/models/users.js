@@ -19,6 +19,8 @@ password:{
 },
 user_rol:{
     type:Sequelize.TEXT
+},auth_token:{
+    type:Sequelize.TEXT
 }
 },{
     timestamps:false
