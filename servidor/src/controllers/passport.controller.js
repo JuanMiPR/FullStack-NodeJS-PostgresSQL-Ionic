@@ -36,15 +36,18 @@ passport.use(new GoogleStrategy({
       }, {
         fields: ['user_name', "user_email", "password", "user_type", "auth_token", "user_rol"]
       });
+      profile.token = token;
       return cb(null, profile);
     } else {
       //el usuario ya existe en la base
+     
+      profile.token = token;
+      
       user.update({
         auth_token: token
       });
       return cb(null, profile);
     }
-    return cb(null, profile);
   }
 ));
 
@@ -80,14 +83,15 @@ async function(accessToken, refreshToken, profile, done) {
     }, {
       fields: ['user_name', "user_email", "password", "user_type", "auth_token", "user_rol"]
     });
-    console.log("nuevo user");
+    
+    profile.token = token;
     done(null,profile);
   } else {
-    console.log("user existente");
-    //el usuario ya existe en la base
+   
     user.update({
       auth_token: token
     });
+    profile.token = token;
     done(null,profile);
   }
  

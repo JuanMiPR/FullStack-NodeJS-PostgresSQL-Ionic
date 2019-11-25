@@ -1,4 +1,5 @@
 import express, { json } from "express";
+const verify = require("../src/controllers/verifyToken.controller");
 import morgan from "morgan";
 const env = require("dotenv");
 var bodyParser = require('body-parser');
@@ -7,7 +8,7 @@ const passport = require("passport");
 
 import userRoutes from "./routes/users";
 import buyRoutes from "./routes/buy";
-import providersRoutes from "./routes/providers";
+import providersRoutes from "./routes/warehouses";
 import productsRoutes from "./routes/products";
 import logingRoutes from "./routes/login";
 

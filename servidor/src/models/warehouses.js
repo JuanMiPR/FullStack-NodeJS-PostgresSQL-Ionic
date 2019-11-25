@@ -1,19 +1,15 @@
 import Sequelize from "sequelize";
 import { sequelize } from "../database/database";
 
-const providers = sequelize.define('providers', {
-    id_product: {
+const warehouses = sequelize.define('warehouses', {
+    id_warehouse: {
         type: Sequelize.INTEGER,
         primaryKey: true
     },
-    id_provider: {
-        type: Sequelize.INTEGER,
-        primaryKey: true
-    },
-    provider_name: {
+    warehouse_address: {
         type: Sequelize.TEXT
     },
-    dni_provider: {
+    phone_number: {
         type: Sequelize.TEXT
     }
 }, {
@@ -21,4 +17,4 @@ const providers = sequelize.define('providers', {
 }
 );
 
-export default providers;
+export default warehouses;
