@@ -7,6 +7,8 @@ const users = sequelize.define('users', {
     },
 user_name:{
     type:Sequelize.TEXT
+},image_profile:{
+    type:Sequelize.TEXT
 },
 user_email:{
     type:Sequelize.TEXT

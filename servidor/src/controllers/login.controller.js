@@ -1,5 +1,7 @@
 const jwt = require("jsonwebtoken");
 import users from "../models/users";
+let cryptr = require("cryptr");
+cryptr = new cryptr("devnami");
 export async function singinUser(req, res) {
     
     let { user_email, password } = req.body;

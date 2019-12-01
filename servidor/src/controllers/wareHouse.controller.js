@@ -24,7 +24,7 @@ export async function createWareHouse(req, res) {
             phone_number
             
         }, {
-            fields: ["provider_name", "dni_provider"]
+            fields: ["warehouse_address", "phone_number"]
         });
         if (newWareHouse) {
             res.json({

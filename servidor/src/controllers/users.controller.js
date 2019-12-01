@@ -1,5 +1,5 @@
 import users from "../models/users";
-
+const jwt = require("jsonwebtoken");
 let cryptr = require("cryptr");
 cryptr = new cryptr("devnami");
 
@@ -19,15 +19,22 @@ export async function getUsers(req, res) {
 }
 
 export async function singoutUser(req, res) {
-    const { user_email } = req.params;
+
+    const verified = jwt.verify(req.header("auth_token"), process.env.TOKEN_SECRET);
+    let email = verified['user_email'];
+
+
+
+
+
     try {
         const user = await users.findOne({
             where: {
-                user_email
+                user_email: email
             }
-        })
+        });
         user.update({
-            auth_token:null
+            auth_token: null
         })
         res.send("user desconected");
     }
@@ -39,12 +46,16 @@ export async function singoutUser(req, res) {
     }
 }
 export async function createUser(req, res) {
-    let { user_name, user_email,password, user_rol } = req.body;
+    let { user_name, user_email, password, user_rol,user_type, image_profile } = req.body;
+    console.log(req);
     const user = await users.findOne({
         where: {
             user_email
         }
     });
+     user_type = "Normal";
+     user_rol = "Normal";
+    const auth_token = null;
     if (user) {
         res.json({
             message: "existe un usuario con ese email"
@@ -56,20 +67,22 @@ export async function createUser(req, res) {
         try {
             let newUser = await users.create({
                 user_name,
-                
+                image_profile,
                 password,
                 user_rol,
-                user_email
+                user_email,
+                user_type,
+                auth_token
 
             }, {
-                fields: ['user_name',  "user_email", "password", "user_rol"]
+                fields: ['user_name', "auth_token", "image_profile", "user_type", "user_email", "password", "user_rol"]
             });
             if (newUser) {
                 res.json({
                     message: "usuario creado",
                     data: newUser
                 })
-                
+
             }
         } catch (e) {
             console.log(e);
@@ -117,17 +130,17 @@ export async function deleteUserById(req, res) {
 }
 export async function updateUserById(req, res) {
     const { user_email } = req.params;
-    let { user_name,  user_dni, password, user_rol } = req.body;
+    let { user_name, user_dni, password, user_rol } = req.body;
     const user = await users.findOne({
         where: {
             user_email
         }
     })
-    
+
 
     if (user != null) {
         user.update({
-            user_name, user_dni,password, user_rol
+            user_name, user_dni, password, user_rol
         })
     }
 

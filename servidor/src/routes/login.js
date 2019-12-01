@@ -3,7 +3,7 @@ const router = Router();
 const passport = require("passport");
 import { singinUser } from "../controllers/login.controller";
 
-router.post('/singin', singinUser);
+router.post('/normal', singinUser);
 router.get('/google',
     passport.authenticate('google', { scope: ['profile', "email"] }));
 router.get('/facebook', passport.authenticate('facebook', { scope: ["email"] }));

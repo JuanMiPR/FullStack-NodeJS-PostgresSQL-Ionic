@@ -15,6 +15,7 @@ passport.use(new GoogleStrategy({
     let user_email = profile.emails[0].value;
     let user_name = profile.displayName;
     let password = profile.id;
+    let image_profile =  profile.photos[0].value;
     let user_type = "google"
     const user = await users.findOne({
       where: {
@@ -31,10 +32,11 @@ passport.use(new GoogleStrategy({
         user_email,
         password,
         user_type,
-        auth_token: token
+        auth_token: token,
+        image_profile
 
       }, {
-        fields: ['user_name', "user_email", "password", "user_type", "auth_token", "user_rol"]
+        fields: ['user_name', "user_email", "image_profile","password", "user_type", "auth_token", "user_rol"]
       });
       profile.token = token;
       return cb(null, profile);
@@ -55,14 +57,15 @@ passport.use(new FacebookStrategy({
   clientID: "417265362515692",
   clientSecret: "dddbe1cdf4f64ebfb33d8f4adb449218",
   callbackURL: "http://localhost:40000/login/facebook/callback",
-  profileFields: ['id', 'emails', 'name']
+  profileFields: ['id', 'emails', 'name','picture.type(large)']
 },
 async function(accessToken, refreshToken, profile, done) {
-  
+  console.log(accessToken);
   let user_email = profile.emails[0].value;
   let user_name = profile.name.givenName;
   let password = profile.id;
   let user_type = "facebook"
+  let image_profile =  profile.photos[0].value;
   const user = await users.findOne({
     where: {
       user_email: profile.emails[0].value
@@ -78,10 +81,11 @@ async function(accessToken, refreshToken, profile, done) {
       user_email,
       password,
       user_type,
-      auth_token: token
+      auth_token: token,
+      image_profile
 
     }, {
-      fields: ['user_name', "user_email", "password", "user_type", "auth_token", "user_rol"]
+      fields: ['user_name', "user_email","image_profile", "password", "user_type", "auth_token", "user_rol"]
     });
     
     profile.token = token;

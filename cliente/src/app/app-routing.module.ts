@@ -6,12 +6,48 @@ const routes: Routes = [
     path: '', redirectTo: 'login', pathMatch: 'full'
   },
   {
-    path: 'inicio',
-    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
+    path: '',
+    loadChildren: () => import('./home/home.module').then(m => m.homeModule)
   },
   {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule)
+  },
+  {
+    path: 'register',
+    loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)
+  },
+  {
+    path: 'warehouses-list',
+    loadChildren: () => import('./pages/warehouses-list/warehouses-list.module').then( m => m.WarehousesListPageModule)
+  },
+  {
+    path: 'add-warehouse',
+    loadChildren: () => import('./pages/add-warehouse/add-warehouse.module').then( m => m.AddWarehousePageModule)
+  },
+  {
+    path: 'add-product',
+    loadChildren: () => import('./pages/add-product/add-product.module').then( m => m.AddProductPageModule)
+  },
+  {
+    path: 'products-list',
+    loadChildren: () => import('./pages/products-list/products-list.module').then( m => m.ProductsListPageModule)
+  },
+  {
+    path: 'add-user',
+    loadChildren: () => import('./pages/add-user/add-user.module').then( m => m.AddUserPageModule)
+  },
+  {
+    path: 'update-user',
+    loadChildren: () => import('./pages/update-user/update-user.module').then( m => m.UpdateUserPageModule)
+  },
+  {
+    path: 'user-list',
+    loadChildren: () => import('./pages/user-list/user-list.module').then( m => m.UserListPageModule)
+  },
+  {
+    path: 'item-details/:id',
+    loadChildren: () => import('./pages/item-details/item-details.module').then( m => m.ItemDetailsPageModule)
   }
 ];
 @NgModule({

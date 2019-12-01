@@ -1,9 +1,73 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>login</ion-title>
+  <ion-toolbar style="text-align: center;">
+    <ion-title>Inicio</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content fullScreen>
+  <br>
+  <div text-center>
+    <img src="../../../assets/Logo.png" style="width: 35%; height: 40%;" />
+  </div>
+  <ion-grid fixed>
 
+    <form (ngSubmit)="logForm()" [formGroup]="registerForm">
+
+
+      <ion-row>
+        <ion-col>
+          <ion-item style="font-size: 85%;margin-top: -5%;">
+            <ion-label position="floating">Email</ion-label>
+            <ion-input inputmode="email" formControlName="email" multiple="false" [(ngModel)]="emailTextValue"
+              name="email">
+            </ion-input>
+          </ion-item>
+          <div class="alert-danger" *ngIf="email.invalid && (email.dirty || email.touched)">
+            <div class=" container-error-message" *ngIf="email.hasError('required')">
+              * El email es obligatorio
+            </div>
+            <div class="container-error-message" *ngIf="email.hasError('email')">
+              * El email debe ser valido
+            </div>
+            <div class="container-error-message" *ngIf="email.hasError('minlength')">
+              * El email debe ser minimo 3 caracteres
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item style="font-size: 85%;">
+            <ion-label position="floating">Contraseña</ion-label>
+            <ion-input type="password" formControlName="password" [(ngModel)]="passwordTextValue" name="password">
+            </ion-input>
+          </ion-item>
+          <div class="alert-danger" *ngIf="password.invalid && (password.dirty || password.touched)">
+            <div class=" container-error-message" *ngIf="password.hasError('required')">
+              * La contraseña es obligatoria
+            </div>
+            <div class="container-error-message" *ngIf="password.hasError('minlength')">
+              * La contraseña debe ser minimo 8 caracteres
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+      <br>
+      <div text-center>
+        <ion-button type="submit" color="success" size="small" expand="block">
+          Conectar</ion-button>
+        
+         <p style="font-size: 85%;">¿No tienes cuenta?<b [routerLink]="['/register']" routerLinkActive="router-link-active" >Registrate.</b></p>
+ 
+        <img src="../../../assets/GoogleLogin.png" style="width: 55%; height: 65%;" />
+        <br>
+        O
+        <br>
+        <img src="../../../assets/FacebooLogin.png" style="width: 55%; height: 65%;" />
+      </div>
+
+
+
+    </form>
+  </ion-grid>
 </ion-content>

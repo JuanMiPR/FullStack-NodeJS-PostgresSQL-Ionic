@@ -1,0 +1,120 @@
+<ion-header>
+  <ion-toolbar>
+
+    <ion-buttons slot="start">
+      <ion-back-button text="" defaultHref="/login"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Nuevo Usuario</ion-title>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content fullscreen>
+
+
+  <form (ngSubmit)="logForm()" [formGroup]="registerForm">
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Nombre</ion-label>
+            <ion-input type="text" formControlName="name" [(ngModel)]="nameTextValue" name="name"></ion-input>
+          </ion-item>
+          <div class="alert-danger" *ngIf="name.invalid && (name.dirty || name.touched)">
+            <div class="container-error-message" *ngIf="name.hasError('required')">
+              * El nombre es obligatorio
+            </div>
+            <div class="container-error-message" *ngIf="name.hasError('minlength')">
+              * Nombre minimo 5 caracteres
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Apellidos</ion-label>
+            <ion-input type="text" formControlName="surname" [(ngModel)]="surnameTextValue" name="surname"></ion-input>
+          </ion-item>
+          <div class="alert-danger" *ngIf="surname.invalid && (surname.dirty || surname.touched)">
+            <div class=" container-error-message" *ngIf="surname.hasError('required')">
+              * Los Apellidos son obligatorio
+
+            </div>
+            <div class="container-error-message" *ngIf="surname.hasError('minlength')">
+              * Apellidos minimo 5 caracteres
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Email</ion-label>
+            <ion-input inputmode="email" formControlName="email" multiple="false" [(ngModel)]="emailTextValue"
+              name="email">
+            </ion-input>
+          </ion-item>
+          <div class="alert-danger" *ngIf="email.invalid && (email.dirty || email.touched)">
+            <div class=" container-error-message" *ngIf="email.hasError('required')">
+              * El email es obligatorio
+            </div>
+            <div class="container-error-message" *ngIf="email.hasError('email')">
+              * El email debe ser valido
+            </div>
+            <div class="container-error-message" *ngIf="email.hasError('minlength')">
+              * El email debe ser minimo 3 caracteres
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item  >
+            <ion-label position="floating" >Contraseña</ion-label>
+            <ion-input type="password" formControlName="password" [(ngModel)]="passwordTextValue" name="password">
+            </ion-input>
+          </ion-item>
+          <div class="alert-danger" *ngIf="password.invalid && (password.dirty || password.touched)">
+            <div class=" container-error-message" *ngIf="password.hasError('required')">
+              * La contraseña es obligatoria
+            </div>
+            <div class="container-error-message" *ngIf="password.hasError('minlength')">
+              * La contraseña debe ser minimo 8 caracteres
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item lines="none">
+            <ion-label position="stacked" id="fileInputLabel" style="font-size: 100%;"> Suba foto de perfil</ion-label>
+
+            <ion-input type="file" accept="image/*" id="typeFile" formControlName="image" (change)="onUpload($event)"
+              ></ion-input>
+            <div class="alert-danger" *ngIf="image.invalid && (image.touched)">
+              <div class=" container-error-message" *ngIf="image.hasError('required')">
+                * La foto es obligatoria
+              </div>
+            </div>
+          </ion-item>
+
+          <input #imageUser type='text' [value]="image_url | async" type="hidden">
+
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+
+          <ion-button type="submit" color="success" size="small" expand="block"
+            *ngIf="image_url | async;else btnDisable">
+            Crear usuario</ion-button>
+          <ng-template #btnDisable>
+            <ion-button type="submit" color="success" size="small" expand="block" expand="block" disabled="true">Crear
+              usuario</ion-button>
+          </ng-template>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

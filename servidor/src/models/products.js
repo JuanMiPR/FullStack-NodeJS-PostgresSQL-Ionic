@@ -6,6 +6,12 @@ const products = sequelize.define('products', {
         type: Sequelize.INTEGER,
         primaryKey: true
     },
+    id_warehouse: {
+        type: Sequelize.INTEGER,
+
+    },product_image:{
+        type:Sequelize.TEXT
+    },
     product_name: {
         type: Sequelize.TEXT
     },
