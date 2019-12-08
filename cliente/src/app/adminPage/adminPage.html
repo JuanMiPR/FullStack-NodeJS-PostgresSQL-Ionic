@@ -1,9 +1,23 @@
-<ion-header>
+<ion-header no-border>
   <ion-toolbar>
-    <ion-title>
-     admin
+    <ion-title class="titles">
+      Administracion
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content>
+  <p class="ion-text-center"><b>¿Que desea administrar?</b><p>
+      <ion-item lines="none" [routerLink]="['/products-list']">
+        <ion-img class="images" src="../../assets/Productos.png" alt="Productos"></ion-img>
+        <ion-label possition="stacked" class="ion-text-center">Productos</ion-label>
+      </ion-item>
+      <ion-item lines="none"  [routerLink]="['/user-list']">
+        <ion-img class="images" src="../../assets/Usuarios.png" alt="Usuarios"></ion-img>
+        <ion-label possition="stacked" class="ion-text-center"> Usuarios</ion-label>
+      </ion-item>
+      <ion-item lines="none"  [routerLink]="['/warehouses-list']">
+        <ion-img class="images" src="../../assets/verAlmacenes.png" alt="Almacenes"></ion-img>
+        <ion-label possition="stacked" class="ion-text-center">Almacenes</ion-label>
+      </ion-item>
+</ion-content>

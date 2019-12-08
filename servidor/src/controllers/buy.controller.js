@@ -8,6 +8,7 @@ export async function getBuys(req, res) {
             data: Buys
         })
     } catch (e) {
+        console.log(e);
         res.status(500).json({
             message: "no hay compras",
             data: {}
@@ -15,14 +16,14 @@ export async function getBuys(req, res) {
     }
 }
 export async function createBuy(req, res) {
-    let { id_user, id_product, quantity, date,payment_type,user_address } = req.body;
+    let { id_buy,id_user, id_product, quantity, date,payment_type,user_address } = req.body;
    
     try {
         let newBuy = await buy.create({
-            id_user, id_product, quantity, date,payment_type,user_address
+            id_buy,id_user, id_product, quantity, date,payment_type,user_address
             
         }, {
-            fields: [ "id_user", "id_product", "quantity", "date","payment_type","user_address"]
+            fields: [ "id_buy","id_user", "id_product", "quantity", "date","payment_type","user_address"]
         });
         if (newBuy) {
             res.json({
@@ -42,9 +43,29 @@ export async function createBuy(req, res) {
 export async function getBuyById(req, res) {
     const { id_user } = req.params;
     try {
-        const findedBuy = await buy.findOne({
+        
+        const buys = await buy.findAll({
             where: {
                 id_user
+            }
+        })
+        res.json({
+            data: buys
+        });
+    }
+    catch (e) {
+        res.status(500).json({
+            message: "compra no encontrada",
+            data: {}
+        })
+    }
+}
+export async function getBuyByIdBuy(req, res) {
+    const { id_buy } = req.params;
+    try {
+        const findedBuy = await buy.findAll({
+            where: {
+                id_buy
             }
         })
         res.json({
@@ -59,11 +80,11 @@ export async function getBuyById(req, res) {
     }
 }
 export async function deleteBuyById(req, res) {
-    const { id_user } = req.params;
+    const { id_buy } = req.params;
     try {
         const deleteRowCount = await buy.destroy({
             where: {
-                id_user
+                id_buy
             }
         })
         res.json({
@@ -72,26 +93,4 @@ export async function deleteBuyById(req, res) {
     } catch (e) {
 
     }
-}
-export async function updateBuyById(req, res) {
-    const { id_user,date } = req.params;
-    let { quantity,payment_type,user_address } = req.body;
-   
-    const findedBuy = await buy.findOne({
-        where: {
-            id_user,
-            date
-        }
-    })
-
-    if (findedBuy != null){
-        findedBuy.update({
-            quantity, payment_type,user_address
-        })
-    }
-
-    res.json({
-        data:findedBuy
-    })
-
 }

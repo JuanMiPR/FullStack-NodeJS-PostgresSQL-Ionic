@@ -3,7 +3,7 @@ export interface Buys{
     id_user:number,
     id_product:number,
     quantity:number,
-    date:Date,
+    date:string,
     payment_type:string,
     user_address:string
 }

@@ -13,7 +13,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { environment } from '../environments/environment';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireStorageModule } from 'angularfire2/storage';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 import { PipesModule } from './pipes/pipes.module';
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
+
+
 
 
 
@@ -22,8 +26,9 @@ import { PipesModule } from './pipes/pipes.module';
   entryComponents: [],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    HttpClientModule, 
-    PipesModule, 
+    AngularFireAuthModule,
+    HttpClientModule,
+    PipesModule,
     BrowserModule,
     IonicModule.forRoot(),
     IonicStorageModule.forRoot(),
@@ -31,6 +36,7 @@ import { PipesModule } from './pipes/pipes.module';
     AngularFireStorageModule,],
   providers: [
     StatusBar,
+    GooglePlus,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

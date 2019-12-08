@@ -1,0 +1,60 @@
+<ion-header no-border>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="" defaultHref="/home/productListPage"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center titles">Comprar</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card mode="ios">
+    <ion-card-header mode="ios">
+      <ion-card-title><b>Lista del pedido</b></ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content mode="ios">
+      <h4 *ngIf="cartItems.length == 0 "> No hay articulos seleccionados</h4>
+      <ion-item-sliding *ngFor="let item of cartItems">
+        <h4><b>Nombre del Producto: </b>{{item.product_name}}</h4>
+
+        <ion-label position="floating" id="inputNumberLabel"><b>Cantidad: </b></ion-label>
+        <ion-input type="number" placeholder="Inserte cantidad" class="inputNumber" id="quantity:{{item.id_product}}">
+        </ion-input>
+      </ion-item-sliding>
+    </ion-card-content>
+  </ion-card>
+  <div>
+    <ion-radio-group *ngIf="cartItems.length > 0 ">
+      <ion-list-header>
+        <ion-label>Tipo de pago</ion-label>
+      </ion-list-header>
+
+      <ion-item>
+        <ion-label>Efectivo</ion-label>
+        <ion-radio slot="end" value="Efectivo" checked id="Cash"></ion-radio>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Tarjeta</ion-label>
+        <ion-radio slot="end" value="Tarjeta"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+    <ion-item lines="none" *ngIf="cartItems.length > 0 ">
+      <ion-label position="floating">Direccion de envio</ion-label>
+      <ion-input type="text" name="address" [(ngModel)]="addressTextField"></ion-input>
+    </ion-item>
+  </div>
+  <div id="addressError" class="ion-text-center">
+    *Debe introducior una direccion valida
+  </div>
+  <br>
+  <div class="ion-text-center">
+    <ion-button *ngIf="cartItems.length > 0 " class="canBuy" mode="md" size="small" color="success" (click)="getIdBuy()"
+      style="font-size: 70%;">
+      Hacer pedido</ion-button>
+    <ion-button *ngIf="cartItems.length > 0 " class="canBuy" mode="md" color="danger" size="small"
+      style="font-size: 70%;" (click)="deleteBuy()">Eliminar pedido</ion-button>
+  </div>
+  <br>
+</ion-content>

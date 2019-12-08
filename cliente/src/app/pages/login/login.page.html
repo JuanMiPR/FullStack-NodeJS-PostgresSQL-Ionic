@@ -1,12 +1,13 @@
 <ion-header>
   <ion-toolbar style="text-align: center;">
-    <ion-title>Inicio</ion-title>
+    <ion-title class="titles">Inicio</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content fullScreen>
   <br>
-  <div text-center>
+  <div class="ion-text-center">
+      
     <img src="../../../assets/Logo.png" style="width: 35%; height: 40%;" />
   </div>
   <ion-grid fixed>
@@ -53,11 +54,11 @@
         </ion-col>
       </ion-row>
       <br>
-      <div text-center>
+      <div class="ion-text-center">
         <ion-button type="submit" color="success" size="small" expand="block">
           Conectar</ion-button>
         
-         <p style="font-size: 85%;">¿No tienes cuenta?<b [routerLink]="['/register']" routerLinkActive="router-link-active" >Registrate.</b></p>
+        <p style="font-size: 85%;">¿No tienes cuenta?<b routerLink ='/register'>Registrate.</b></p>
  
         <img src="../../../assets/GoogleLogin.png" style="width: 55%; height: 65%;" />
         <br>

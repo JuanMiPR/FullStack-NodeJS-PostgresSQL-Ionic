@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="titles">Detalles de la compra</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button text="" defaultHref="/home/buyListPage"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title class="cardTitles">Detalles de su compra</ion-card-title>
+      <br>
+      <ion-card-subtitle><b>Identificador: </b>{{idBuy}}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-label><b>Lista de productos</b></ion-label>
+      <div *ngFor="let buy of buyDetails">
+        <ion-label class="titles"><b>Identificado del producto:</b>{{buy.id_product}}</ion-label>
+        <br>
+        <ion-label class="titles"><b>Cantidad del producto: </b>{{buy.quantity}}</ion-label>
+        <br>
+      </div>
+
+    </ion-card-content>
+  </ion-card>
+</ion-content>

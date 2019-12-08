@@ -3,7 +3,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: '', redirectTo: 'login', pathMatch: 'full'
+    path: '', redirectTo: '/home/adminPage', pathMatch: 'full'
   },
   {
     path: '',
@@ -31,7 +31,7 @@ const routes: Routes = [
   },
   {
     path: 'products-list',
-    loadChildren: () => import('./pages/products-list/products-list.module').then( m => m.ProductsListPageModule)
+    loadChildren: () => import('./pages/products-list/products-list-Admin.module').then( m => m.ProductsListPageModuleAdmin)
   },
   {
     path: 'add-user',
@@ -48,6 +48,18 @@ const routes: Routes = [
   {
     path: 'item-details/:id',
     loadChildren: () => import('./pages/item-details/item-details.module').then( m => m.ItemDetailsPageModule)
+  },
+  {
+    path: 'cart-page',
+    loadChildren: () => import('./pages/cart-page/cart-page.module').then( m => m.CartPagePageModule)
+  },
+  {
+    path: 'buy-details/:id',
+    loadChildren: () => import('./pages/buy-details/buy-details.module').then( m => m.BuyDetailsPageModule)
+  },
+  {
+    path: 'update-product/:id',
+    loadChildren: () => import('./pages/update-product/update-product.module').then( m => m.UpdateProductPageModule)
   }
 ];
 @NgModule({

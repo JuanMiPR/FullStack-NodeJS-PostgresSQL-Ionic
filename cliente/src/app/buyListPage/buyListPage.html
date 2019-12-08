@@ -1,9 +1,53 @@
-<ion-header>
+<ion-header no-border>
   <ion-toolbar>
-    <ion-title>
-      buy list
+    <ion-title class="titles">
+      Tus compras
     </ion-title>
+    <ion-icon name="cart" style="font-size: 30px; margin-right: 10px;" slot="end" (click)="goToCart()"></ion-icon>
   </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content>
+  <ion-item>
+    <ion-label position="floating">Mes que quiere consultar</ion-label>
+    <ion-select (ionChange)="selectChanged($event)">
+      <ion-select-option value="01">Enero</ion-select-option>
+      <ion-select-option value="02">Febrero</ion-select-option>
+      <ion-select-option value="03">Marzo</ion-select-option>
+      <ion-select-option value="04">Abril</ion-select-option>
+      <ion-select-option value="05">Mayo</ion-select-option>
+      <ion-select-option value="06">Junio</ion-select-option>
+      <ion-select-option value="07">Julio</ion-select-option>
+      <ion-select-option value="08">Agosto</ion-select-option>
+      <ion-select-option value="09">Septiembre</ion-select-option>
+      <ion-select-option value="10">Octubre</ion-select-option>
+      <ion-select-option value="11">Noviembre</ion-select-option>
+      <ion-select-option value="12">Diciembre</ion-select-option>
+      <ion-select-option value="00" selected>Ninguno seleccionado</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+
+
+  <ion-list>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title class="cardTitltes"><b>Compras del mes seleccionado:</b></ion-card-title>
+      </ion-card-header>
+
+
+      <ion-item *ngFor="let buy of Buys | monthFilter:monthFilter" detail (click)="goToBuyDetail(buy)">
+        <div>
+          <ion-label class="titles"><b>Identificador de la compra:</b>{{buy.id_buy}}</ion-label>
+
+          <ion-label class="titles"><b>Fecha:</b>{{buy.date}}</ion-label>
+        </div>
+      </ion-item>
+
+
+    </ion-card>
+
+
+  </ion-list>
+
+</ion-content>

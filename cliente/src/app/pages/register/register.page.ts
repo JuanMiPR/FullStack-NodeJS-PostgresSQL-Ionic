@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
-  styleUrls: ['./register.page.scss'],
+  styleUrls: ['./register.page.scss','../../app.component.scss'],
 })
 export class RegisterPage implements OnInit {
 
@@ -70,9 +70,9 @@ export class RegisterPage implements OnInit {
 
   }
 
-  onUpload(e) {
+  onUpload(event) {
     const imageId = this.emailTextValue;
-    this.file = e.target.files[0];
+    this.file = event.target.files[0];
     this.filePath = 'images/' + imageId;
     this.imageRef = this.imageUpload.ref(this.filePath);
     const task = this.imageUpload.upload(this.filePath, this.file);

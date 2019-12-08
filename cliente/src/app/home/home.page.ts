@@ -9,12 +9,13 @@ export class home implements OnInit {
   ngOnInit(): void {
     let user = JSON.parse(localStorage.getItem("User"));
 
-    
-     if (user['user_rol']==="Admin"){
-       document.getElementById("admin").style.display="block";
-     }
+    if (user!= null) {
+      if (user['user_rol'] === "Admin") {
+        document.getElementById("admin").style.display = "block";
+      }
+    }
   }
 
-  constructor() {}
+  constructor() { }
 
 }

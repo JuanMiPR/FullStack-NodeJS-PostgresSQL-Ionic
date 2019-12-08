@@ -1,0 +1,40 @@
+<ion-header no-border>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="" defaultHref="/home/adminPage"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="titles">Lista de productos</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="goToAdd()">
+        <ion-icon slot="icon-only"    name="add-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-searchbar placeholder="Busque productos" animated (ionChange)="search($event)"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item-sliding *ngFor=" let prod of products | filter:filterText">
+      <ion-item (click)="itemDetail(prod.id_product)" detail>
+        <ion-label class="ion-text-center"><b>ID:</b>{{prod.id_product}}</ion-label>
+        <ion-label class="ion-text-center">{{prod.product_name}}</ion-label>
+
+      </ion-item>
+      <ion-item-options side="end">
+        <ion-item-option (click)="deleteProduct(prod)" color="secundary">
+          <ion-icon name="trash" color="danger" slot="icon-only" style="font-size:20px ;">
+          </ion-icon>
+        </ion-item-option>
+        <ion-item-option (click)="updateProduct(prod)" color="secundary" style="font-size:15px ;">
+          <ion-icon name="albums" color="success" slot="icon-only">
+          </ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+
+
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>

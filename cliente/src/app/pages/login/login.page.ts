@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
-  styleUrls: ['./login.page.scss'],
+  styleUrls: ['./login.page.scss','../../app.component.scss'],
 })
 export class LoginPage implements OnInit {
 
@@ -25,7 +25,8 @@ export class LoginPage implements OnInit {
   }
   ngOnInit() {
     let user= JSON.parse(localStorage.getItem("User"));
-    if(user){
+    console.log(user);
+    if(user !=null){
       this.router.navigate(["/home/productListPage"]);
     }
   }

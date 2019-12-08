@@ -1,23 +1,26 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/home/productListPage"></ion-back-button>
+      <ion-back-button text=""  defaultHref="/home/productListPage"></ion-back-button>
     </ion-buttons>
-    <ion-title>itemDetails</ion-title>
+    <ion-title class="titles">Detalles del producto</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-card>
     <ion-card-header>
-      <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-      <ion-card-title>Card Title</ion-card-title>
-    </ion-card-header>
 
+      <ion-card-title class="ion-text-center">
+        <ion-img [src]="product_image" width="350" height="140" alt="{{product_name}}"></ion-img>
+      </ion-card-title>
+    </ion-card-header>
     <ion-card-content>
-     <ion-label >{{content}}</ion-label>
+      <ion-label><b>Nombre del Producto: </b>{{product_name}}</ion-label>
+      <br>
+      <ion-label><b>Stock Disponible: </b>{{product_stock}}</ion-label>
     </ion-card-content>
   </ion-card>
 
-  
+
 </ion-content>

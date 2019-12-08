@@ -18,16 +18,6 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'buyPage',
-        children: [
-          {
-            path: '',
-            loadChildren: () =>
-              import('../buyPage/buyPage.module').then(m => m.buyPageModule)
-          }
-        ]
-      },
-      {
         path: 'buyListPage',
         children: [
           {
@@ -36,7 +26,8 @@ const routes: Routes = [
               import('../buyListPage/buyListPage.module').then(m => m.buyListPageModule)
           }
         ]
-      }, {
+      },
+      {
         path: 'adminPage',
         children: [
           {
@@ -64,4 +55,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class homeRoutingModule {}
+export class homeRoutingModule { }
