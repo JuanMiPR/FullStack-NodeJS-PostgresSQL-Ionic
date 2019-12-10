@@ -1,0 +1,30 @@
+<ion-header no-border>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="" defaultHref="user-list"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="titles">Detalles del usuario</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title class="ion-text-center">
+        <ion-img [src]="user_image" width="350" height="140" alt="{{user_name}}"></ion-img>
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-label><b>Nombre del Usuario: </b>{{user_name}}</ion-label>
+      <br>
+      <br>
+      <ion-label><b>Email del Usuario: </b>{{user_email}}</ion-label>
+      <br>
+      <br>
+      <ion-label><b>Rol del Usuario: </b>{{user_rol}}</ion-label>
+      <br>
+      <br>
+      <ion-label><b>Tipo de usuario: </b>{{user_type}}</ion-label>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

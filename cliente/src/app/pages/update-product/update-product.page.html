@@ -3,10 +3,65 @@
     <ion-buttons slot="start">
       <ion-back-button text="" defaultHref="/products-list"></ion-back-button>
     </ion-buttons>
-    <ion-title class="titles">Actualize el stock</ion-title>
+    <ion-title class="titles">Actualize el producto</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title class="ion-text-center">
+        <b>Datos actuales</b>
+      </ion-card-title>
+      <br>
+      <div class="ion-text-center">
+        <ion-img [src]="oldProduct_image" width="350" height="140" alt="{{oldProduct_name}}"></ion-img>
+      </div>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-label><b>Nombre del Producto: </b>{{oldProduct_name}}</ion-label>
+      <br>
+      <ion-label><b>Stock Disponible: </b>{{oldProduct_stock}}</ion-label>
+    </ion-card-content>
+  </ion-card>
+  <ion-button (click)="beforeUpdate()" id="beforeUpdateButton" color="success" size="small" expand="block"
+    expand="block">Actualizar</ion-button>
+  <form id="updateProducts" (ngSubmit)="updateForm()" [formGroup]="Form">
+    <div>
+      <ion-item>
+        <ion-label position="floating">Nombre del producto</ion-label>
+        <ion-input type="text" formControlName="name" name="name"></ion-input>
+      </ion-item>
+      <div class="alert-danger" *ngIf="name.invalid && (name.dirty || name.touched)">
+        <div class="container-error-message" *ngIf="name.hasError('minlength')">
+          * Nombre minimo 5 caracteres
+        </div>
+      </div>
+    </div>
+    <div>
+      <ion-item>
+        <ion-label position="floating">Stock: </ion-label>
+        <ion-input type="number" formControlName="stock" name="stock"></ion-input>
+      </ion-item>
+      <div class="alert-danger" *ngIf="stock.invalid && (stock.dirty || stock.touched)">
+        <div class="container-error-message" *ngIf="stock.hasError('min')">
+          * Stock minimo 1
+        </div>
+      </div>
+    </div>
+    <div>
+      <ion-item>
+        <ion-label>Almacen</ion-label>
+        <ion-select *ngFor="let warehouse of warehouses" formControlName="warehouseSelected">
+          <ion-select-option>{{warehouse.id_warehouse}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </div>
+    <div>
+      <ion-button type="submit" color="success" size="small" expand="block" >
+        Actualizar Producto</ion-button>
+     
+    </div>
+  </form>
+  <br>
 </ion-content>

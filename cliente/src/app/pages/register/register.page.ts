@@ -20,10 +20,7 @@ export class RegisterPage implements OnInit {
   imageRef: AngularFireStorageReference;
   file: File;
   image_url: Observable<string>;
-  nameTextValue: string;
-  surnameTextValue: string;
-  emailTextValue: string;
-  passwordTextValue: string;
+ 
   registerForm: FormGroup;
   constructor(private imageUpload: AngularFireStorage, private api: ApiService, private router: Router) {
     this.registerForm = this.createFormGroup();
@@ -48,11 +45,11 @@ export class RegisterPage implements OnInit {
       console.log();
 
       let userInfo = {
-        "user_name": this.nameTextValue + " " + this.surnameTextValue,
-        "password": this.passwordTextValue,
+        "user_name": this.registerForm.get('name').value + " " +  this.registerForm.get('surname').value,
+        "password": this.registerForm.get('password').value,
         "user_rol": null,
         "user_type": null,
-        "user_email": this.emailTextValue,
+        "user_email":  this.registerForm.get('email').value,
         "image_profile": this.input.nativeElement.defaultValue,
         "auth_token": null,
       }
@@ -71,7 +68,7 @@ export class RegisterPage implements OnInit {
   }
 
   onUpload(event) {
-    const imageId = this.emailTextValue;
+    const imageId =  this.registerForm.get('email').value;
     this.file = event.target.files[0];
     this.filePath = 'images/' + imageId;
     this.imageRef = this.imageUpload.ref(this.filePath);

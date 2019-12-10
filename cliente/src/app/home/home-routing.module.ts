@@ -38,6 +38,16 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'profilePage',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../profilePage/profilePage.module').then(m => m.profilePageModule)
+          }
+        ]
+      },
+      {
         path: 'home',
         redirectTo: '/home/productListPage',
         pathMatch: 'full'

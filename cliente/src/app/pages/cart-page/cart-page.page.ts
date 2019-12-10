@@ -23,7 +23,8 @@ export class CartPagePage implements OnInit {
   }
   getBuybyid(id_buy) {
     this.api.getBuyByIdBuy(id_buy).subscribe((data) => {
-      if (data['data'] === null) {
+      if (data['data'].length === 0) {
+        console.log("no esta");
         this.buy(id_buy);
       }
       else {

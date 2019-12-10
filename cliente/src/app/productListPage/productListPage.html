@@ -9,7 +9,7 @@
   </ion-toolbar>
 
   <ion-toolbar>
-    <ion-searchbar placeholder="Busque productos" animated (ionChange)="search($event)"></ion-searchbar>
+    <ion-searchbar mode="ios" placeholder="Busque productos" animated (ionChange)="search($event)"></ion-searchbar>
   </ion-toolbar>
 
 </ion-header>
@@ -19,8 +19,8 @@
   <ion-list>
     <ion-item-sliding *ngFor=" let prod of products | filter:filterText">
       <ion-item (click)="itemDetail(prod.id_product)" detail>
-        <ion-img src="{{prod.product_image}}" alt="{{prod.product_name}}"></ion-img>
-        <ion-label class="ion-text-center">{{prod.product_name}}</ion-label>
+          <ion-img src="{{prod.product_image}}"  id="imgList"alt="{{prod.product_name}}"></ion-img>
+        
         
       </ion-item>
       <ion-item-options side="end">

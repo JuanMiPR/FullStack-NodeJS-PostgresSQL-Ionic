@@ -3,6 +3,7 @@ import { ApiService } from '../services/api.service';
 import { Buys } from '../models/buy.model';
 
 import { Router } from '@angular/router';
+import { AlertController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-buyListPage',
@@ -13,12 +14,15 @@ export class buyListPage {
   Buys: Buys[] = [];
   monthFilter: string;
   auxFilter;
-
-  constructor(private api: ApiService, private router: Router) {
+  user;
+  constructor(private api: ApiService, private router: Router, private alertController: AlertController, private toastController: ToastController) {
     this.monthFilter = "00";
-    const user = JSON.parse(localStorage.getItem("User"));
-    this.loadBuys(user.user_id);
+    this.user = JSON.parse(localStorage.getItem("User"));
+    this.loadBuys(this.user.user_id);
 
+  }
+  deleteBuy(id) {
+    this.presentAlert("¿Seguro que desea eliminar la compra?", id);
   }
   verBuys() {
     console.log(this.auxFilter);
@@ -47,5 +51,42 @@ export class buyListPage {
   }
   goToCart() {
     this.router.navigate(["/cart-page"]);
+  }
+  async presentToast(msg: string) {
+    const toast = await this.toastController.create({
+      message: msg,
+      duration: 2000
+    });
+    toast.present();
+  }
+  async presentAlert(msg, id) {
+    const alert = await this.alertController.create({
+      header: 'Aviso!',
+      message: msg,
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+
+          }
+        }, {
+          text: 'Si',
+          cssClass: 'Danger',
+          handler: () => {
+            this.api.deleteBuy(id).subscribe((data) => {
+              this.loadBuys(this.user.user_id);
+              this.presentToast("Compra eliminada");
+            }, error => {
+              this.presentToast("Fallo al eliminar");
+            });
+
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 }

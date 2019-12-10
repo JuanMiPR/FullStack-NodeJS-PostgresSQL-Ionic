@@ -1,0 +1,31 @@
+<ion-header no-border>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="" defaultHref="warehouses-list"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="titles">Detalles del almacen</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title class="ion-text-center">
+        <b>Detalles del almacen</b>
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-label><b>Direcion del almacen: </b>{{address}}</ion-label>
+      <br>
+      <br>
+      <ion-label><b>Numero del almacen: </b>{{phone_number}}</ion-label>
+      <br>
+      <br>
+      <ion-label><b>Productos del almacen</b></ion-label>
+      <ion-item *ngFor="let prod of products">
+      <h4 *ngIf="products.length == 0 "> No hay articulos</h4>
+        <ion-label><b>Nombre: </b> <br>{{prod.product_name}}</ion-label>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

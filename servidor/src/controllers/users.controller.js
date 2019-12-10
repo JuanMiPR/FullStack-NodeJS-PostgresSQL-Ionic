@@ -94,11 +94,11 @@ export async function createUser(req, res) {
     }
 }
 export async function getUserById(req, res) {
-    const { user_email } = req.params;
+    const { id_user } = req.params;
     try {
         const user = await users.findOne({
             where: {
-                user_email
+                id_user
             }
         });
         console.log(user);
@@ -114,11 +114,11 @@ export async function getUserById(req, res) {
     }
 }
 export async function deleteUserById(req, res) {
-    const { user_email } = req.params;
+    const { id_user } = req.params;
     try {
         const deleteRowCount = await users.destroy({
             where: {
-                user_email
+                id_user
             }
         })
         res.json({
@@ -129,18 +129,18 @@ export async function deleteUserById(req, res) {
     }
 }
 export async function updateUserById(req, res) {
-    const { user_email } = req.params;
-    let { user_name, user_dni, password, user_rol } = req.body;
+    const { id_user } = req.params;
+    let { user_name, user_rol, user_email } = req.body;
     const user = await users.findOne({
         where: {
-            user_email
+            id_user
         }
     })
 
 
     if (user != null) {
         user.update({
-            user_name, user_dni, password, user_rol
+            user_name, user_rol, user_email
         })
     }
 

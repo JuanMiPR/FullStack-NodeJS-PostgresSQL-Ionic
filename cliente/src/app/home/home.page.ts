@@ -10,7 +10,7 @@ export class home implements OnInit {
     let user = JSON.parse(localStorage.getItem("User"));
 
     if (user!= null) {
-      if (user['user_rol'] === "Admin") {
+      if (user['user_rol'].toLowerCase() === "admin") {
         document.getElementById("admin").style.display = "block";
       }
     }

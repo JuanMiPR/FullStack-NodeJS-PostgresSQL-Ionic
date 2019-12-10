@@ -36,13 +36,21 @@
       </ion-card-header>
 
 
-      <ion-item *ngFor="let buy of Buys | monthFilter:monthFilter" detail (click)="goToBuyDetail(buy)">
-        <div>
-          <ion-label class="titles"><b>Identificador de la compra:</b>{{buy.id_buy}}</ion-label>
+      <ion-item-sliding *ngFor="let buy of Buys | monthFilter:monthFilter">
+        <ion-item detail (click)="goToBuyDetail(buy)">
+          <div>
+            <ion-label class="titles"><b>Identificador de la compra:</b>{{buy.id_buy}}</ion-label>
+            <ion-label class="titles"><b>Fecha:</b>{{buy.date}}</ion-label>
+          </div>
+        </ion-item>
+        <ion-item-options side="end">
+          <ion-item-option (click)="deleteBuy(buy.id_buy)" color="secundary">
+            <ion-icon name="trash" color="danger" slot="icon-only" style="font-size:20px ;">
+            </ion-icon>
+          </ion-item-option>
 
-          <ion-label class="titles"><b>Fecha:</b>{{buy.date}}</ion-label>
-        </div>
-      </ion-item>
+        </ion-item-options>
+      </ion-item-sliding>
 
 
     </ion-card>

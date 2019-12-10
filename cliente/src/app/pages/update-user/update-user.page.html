@@ -1,9 +1,79 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title class="titles">updateUser</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button text="" defaultHref="/user-list"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="titles">Actualize el usuario</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
 
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title class="ion-text-center">
+        <b>Datos actuales</b>
+      </ion-card-title>
+      <br>
+      <div class="ion-text-center">
+        <ion-img [src]="oldUser_image" width="350" height="140" alt="{{oldUser_name}}"></ion-img>
+      </div>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-label><b>Nombre del usuario: </b>{{oldUser_name}}</ion-label>
+      <br>
+      <ion-label><b>Email del usuario: </b>{{oldUser_email}}</ion-label>
+      <br>
+      <ion-label><b>Rol del usuario: </b>{{oldUser_rol}}</ion-label>
+      <br>
+    </ion-card-content>
+  </ion-card>
+  <ion-button (click)="beforeUpdate()" id="beforeUpdateButton" color="success" size="small" expand="block"
+    expand="block">Actualizar</ion-button>
+  <form id="updateUser" (ngSubmit)="updateForm()" [formGroup]="Form">
+    <div>
+      <ion-item>
+        <ion-label position="floating">Nombre</ion-label>
+        <ion-input type="text" formControlName="name" name="name"></ion-input>
+      </ion-item>
+      <div class="alert-danger" *ngIf="name.invalid && (name.dirty || name.touched)">
+
+        <div class="container-error-message" *ngIf="name.hasError('minlength')">
+          * Nombre minimo 5 caracteres
+        </div>
+      </div>
+    </div>
+    <div>
+      <ion-item>
+        <ion-label position="floating">Rol</ion-label>
+        <ion-input type="text" formControlName="userRol" name="rol"></ion-input>
+      </ion-item>
+      <div class="alert-danger" *ngIf="userRol.invalid && (userRol.dirty || userRol.touched)">
+
+        <div class="container-error-message" *ngIf="userRol.hasError('pattern')">
+          * El rol debe ser admin o normal
+        </div>
+      </div>
+    </div>
+    <div>
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input inputmode="email" formControlName="email" multiple="false" name="email">
+        </ion-input>
+      </ion-item>
+      <div class="alert-danger" *ngIf="email.invalid && (email.dirty || email.touched)">
+        <div class="container-error-message" *ngIf="email.hasError('email')">
+          * El email debe ser valido
+        </div>
+        <div class="container-error-message" *ngIf="email.hasError('minlength')">
+          * El email debe ser minimo 3 caracteres
+        </div>
+      </div>
+    </div>
+    <br>
+    <div>
+      <ion-button type="submit" color="success" size="small" expand="block">Actualizar Usuario</ion-button>
+    </div>
+    <br>
+  </form>
 </ion-content>

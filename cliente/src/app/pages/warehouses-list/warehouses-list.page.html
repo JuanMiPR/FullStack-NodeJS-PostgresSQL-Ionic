@@ -1,12 +1,38 @@
-<ion-header>
+<ion-header no-border>
   <ion-toolbar>
-    <ion-buttons  slot="start">
+    <ion-buttons slot="start">
       <ion-back-button text="" defaultHref="/home/adminPage"></ion-back-button>
     </ion-buttons>
-    <ion-title class="titles">warehouses_list</ion-title>
+    <ion-title class="titles">Lista de almacenes</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="goToAdd()">
+        <ion-icon slot="icon-only" name="add-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-searchbar mode="ios" placeholder="Busque usuarios" animated (ionChange)="search($event)"></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-list>
+    <ion-item-sliding *ngFor=" let warehouse of Warehouses | filterWarehouse:filterText">
+      <ion-item (click)="warehouseDetail(warehouse.id_warehouse)" detail>
 
+        <ion-label class="ion-text-justify"><b>Numero telefono:</b> {{warehouse.phone_number}}</ion-label>
+
+      </ion-item>
+      <ion-item-options side="end">
+        <ion-item-option (click)="deleteWarehouse(warehouse)" color="secundary">
+          <ion-icon name="trash" color="danger" slot="icon-only" style="font-size:20px ;">
+          </ion-icon>
+        </ion-item-option>
+        <ion-item-option (click)="updateWarehouse(warehouse)" color="secundary" style="font-size:15px ;">
+          <ion-icon name="albums" color="success" slot="icon-only">
+          </ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
 </ion-content>

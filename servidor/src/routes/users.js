@@ -8,9 +8,9 @@ import { createUser,  singoutUser, getUsers, getUserById, deleteUserById, update
 router.post('/singup', createUser);
 router.post('/singout',verify ,singoutUser);
 router.get("/all", verify, getUsers);
-router.get("/user/:user_email", verify, getUserById);
-router.delete("/:user_email", verify, deleteUserById);
-router.put("/:user_email", verify, updateUserById);
+router.get("/:id_user", verify, getUserById);
+router.delete("/:id_user", verify, deleteUserById);
+router.put("/:id_user", verify, updateUserById);
 
 
 export default router;

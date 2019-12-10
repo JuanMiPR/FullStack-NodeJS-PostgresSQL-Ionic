@@ -1,12 +1,93 @@
 <ion-header>
-    <ion-toolbar>
-        <ion-buttons slot="start">
-          <ion-back-button text="" defaultHref="/products-list"></ion-back-button>
-        </ion-buttons>
-        <ion-title class="titles">Añadir producto</ion-title>
-      </ion-toolbar>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="" defaultHref="/products-list-admin"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="titles">Añadir producto</ion-title>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <form (ngSubmit)="addForm()" [formGroup]="Form">
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Nombre del producto</ion-label>
+            <ion-input type="text" formControlName="name" name="name"></ion-input>
+          </ion-item>
+          <div class="alert-danger" *ngIf="name.invalid && (name.dirty || name.touched)">
+            <div class="container-error-message" *ngIf="name.hasError('required')">
+              * El nombre es obligatorio
+            </div>
+            <div class="container-error-message" *ngIf="name.hasError('minlength')">
+              * Nombre minimo 5 caracteres
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Stock inicial: </ion-label>
+            <ion-input type="number" formControlName="stock" name="stock"></ion-input>
+          </ion-item>
+          <div class="alert-danger" *ngIf="stock.invalid && (stock.dirty || stock.touched)">
+            <div class=" container-error-message" *ngIf="stock.hasError('required')">
+              * El stock es obligatorio
+            </div>
+            <div class="container-error-message" *ngIf="stock.hasError('min')">
+              * Stock minimo 1
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label>Almacen</ion-label>
+            <ion-select formControlName="warehouseSelected">
+              <ion-item *ngFor="let warehouse of warehouses">
+                <ion-select-option>{{warehouse.id_warehouse}}</ion-select-option>
+              </ion-item>
+            </ion-select>
+          </ion-item>
+          <div class="alert-danger" *ngIf="warehouseSelected.invalid && (warehouseSelected.touched)">
+            <div class=" container-error-message" *ngIf="warehouseSelected.hasError('required')">
+              * El almacen es obligatorio
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item lines="none">
+            <ion-label id="fileInputLabel"> Suba foto del producto
+            </ion-label>
+
+            <ion-input type="file" accept="image/*" id="typeFile" formControlName="image" (change)="onUpload($event)">
+            </ion-input>
+
+          </ion-item>
+          <div class="alert-danger" *ngIf="image.invalid && (image.touched)">
+            <div class=" container-error-message" *ngIf="image.hasError('required')">
+              * La foto es obligatoria
+            </div>
+          </div>
+          <input #imageProduct type='text' [value]="image_url | async" type="hidden">
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button type="submit" color="success" size="small" expand="block"
+            *ngIf="image_url | async;else btnDisable">Crear Producto</ion-button>
+          <ng-template #btnDisable>
+            <ion-button type="submit" color="success" size="small" expand="block" expand="block" disabled="true">Crear
+              Producto</ion-button>
+          </ng-template>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
 
 </ion-content>

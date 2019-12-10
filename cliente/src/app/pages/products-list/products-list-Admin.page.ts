@@ -38,7 +38,7 @@ export class ProductsListPageAdmin implements OnInit {
     this.router.navigate(["/update-product/" + prod.id_product]);
   }
   deleteProduct(prod: Products) {
-    console.log(prod);
+    
     this.presentAlert("¿Seguro que desea eliminar el producto?", prod.id_product);
   }
   async presentToast(msg: string) {

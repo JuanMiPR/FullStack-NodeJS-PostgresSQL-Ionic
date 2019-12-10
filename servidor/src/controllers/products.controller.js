@@ -15,16 +15,16 @@ export async function getProducts(req, res) {
     }
 }
 export async function createProduct(req, res) {
-    
-    let { product_name, product_stock,id_warehouse,product_image } = req.body;
-   console.log(product_name);
+
+    let { product_name, product_stock, id_warehouse, product_image } = req.body;
+    console.log(product_name);
     try {
         let newProduct = await products.create({
             product_name,
-            product_stock,id_warehouse,product_image
-            
+            product_stock, id_warehouse, product_image
+
         }, {
-            fields: ['product_name', "product_stock","product_image","id_warehouse"]
+            fields: ['product_name', "product_stock", "product_image", "id_warehouse"]
         });
         if (newProduct) {
             res.json({
@@ -41,12 +41,32 @@ export async function createProduct(req, res) {
     }
 
 }
+
 export async function getProductById(req, res) {
     const { id_product } = req.params;
     try {
         const product = await products.findOne({
             where: {
                 id_product
+            }
+        })
+        res.json({
+            data: product
+        });
+    }
+    catch (e) {
+        res.status(500).json({
+            message: "producto no encontrado",
+            data: {}
+        })
+    }
+}
+export async function getProductByIdWarehouse(req, res) {
+    const { id_warehouse } = req.params;
+    try {
+        const product = await products.findAll({
+            where: {
+                id_warehouse
             }
         })
         res.json({
@@ -77,21 +97,22 @@ export async function deleteProductById(req, res) {
 }
 export async function updateProductById(req, res) {
     const { id_product } = req.params;
-    let { product_name, product_stock } = req.body;
+    let { product_name, product_stock, product_image, id_warehouse } = req.body;
     const product = await products.findOne({
         where: {
             id_product
         }
     })
 
-    if (product != null){
+    if (product != null) {
         product.update({
-            product_name, product_stock
+            product_name, product_stock, product_image, id_warehouse
         })
+
     }
 
     res.json({
-        data:product
+        data: product
     })
 
 }

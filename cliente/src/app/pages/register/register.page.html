@@ -18,7 +18,7 @@
         <ion-col>
           <ion-item>
             <ion-label position="floating">Nombre</ion-label>
-            <ion-input type="text" formControlName="name" [(ngModel)]="nameTextValue" name="name"></ion-input>
+            <ion-input type="text" formControlName="name" name="name"></ion-input>
           </ion-item>
           <div class="alert-danger" *ngIf="name.invalid && (name.dirty || name.touched)">
             <div class="container-error-message" *ngIf="name.hasError('required')">
@@ -34,7 +34,7 @@
         <ion-col>
           <ion-item>
             <ion-label position="floating">Apellidos</ion-label>
-            <ion-input type="text" formControlName="surname" [(ngModel)]="surnameTextValue" name="surname"></ion-input>
+            <ion-input type="text" formControlName="surname" name="surname"></ion-input>
           </ion-item>
           <div class="alert-danger" *ngIf="surname.invalid && (surname.dirty || surname.touched)">
             <div class=" container-error-message" *ngIf="surname.hasError('required')">
@@ -51,8 +51,7 @@
         <ion-col>
           <ion-item>
             <ion-label position="floating">Email</ion-label>
-            <ion-input inputmode="email" formControlName="email" multiple="false" [(ngModel)]="emailTextValue"
-              name="email">
+            <ion-input inputmode="email" formControlName="email" multiple="false" name="email">
             </ion-input>
           </ion-item>
           <div class="alert-danger" *ngIf="email.invalid && (email.dirty || email.touched)">
@@ -70,9 +69,9 @@
       </ion-row>
       <ion-row>
         <ion-col>
-          <ion-item  >
-            <ion-label position="floating" >Contraseña</ion-label>
-            <ion-input type="password" formControlName="password" [(ngModel)]="passwordTextValue" name="password">
+          <ion-item>
+            <ion-label position="floating">Contraseña</ion-label>
+            <ion-input type="password" formControlName="password" name="password">
             </ion-input>
           </ion-item>
           <div class="alert-danger" *ngIf="password.invalid && (password.dirty || password.touched)">
@@ -88,10 +87,10 @@
       <ion-row>
         <ion-col>
           <ion-item lines="none">
-            <ion-label position="stacked" id="fileInputLabel" style="font-size: 100%;"> Suba foto de perfil</ion-label>
+            <ion-label position="stacked" id="fileInputLabel" > Suba foto de perfil</ion-label>
 
-            <ion-input type="file" accept="image/*" id="typeFile" formControlName="image" (change)="onUpload($event)"
-              ></ion-input>
+            <ion-input type="file" accept="image/*" id="typeFile" formControlName="image" (change)="onUpload($event)">
+            </ion-input>
             <div class="alert-danger" *ngIf="image.invalid && (image.touched)">
               <div class=" container-error-message" *ngIf="image.hasError('required')">
                 * La foto es obligatoria
@@ -100,7 +99,6 @@
           </ion-item>
 
           <input #imageUser type='text' [value]="image_url | async" type="hidden">
-
         </ion-col>
       </ion-row>
       <ion-row>

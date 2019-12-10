@@ -3,7 +3,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: '', redirectTo: '/home/adminPage', pathMatch: 'full'
+    path: '', redirectTo: 'login', pathMatch: 'full'
   },
   {
     path: '',
@@ -30,15 +30,12 @@ const routes: Routes = [
     loadChildren: () => import('./pages/add-product/add-product.module').then( m => m.AddProductPageModule)
   },
   {
-    path: 'products-list',
+    path: 'products-list-admin',
     loadChildren: () => import('./pages/products-list/products-list-Admin.module').then( m => m.ProductsListPageModuleAdmin)
   },
+  
   {
-    path: 'add-user',
-    loadChildren: () => import('./pages/add-user/add-user.module').then( m => m.AddUserPageModule)
-  },
-  {
-    path: 'update-user',
+    path: 'update-user/:id',
     loadChildren: () => import('./pages/update-user/update-user.module').then( m => m.UpdateUserPageModule)
   },
   {
@@ -60,6 +57,18 @@ const routes: Routes = [
   {
     path: 'update-product/:id',
     loadChildren: () => import('./pages/update-product/update-product.module').then( m => m.UpdateProductPageModule)
+  },
+  {
+    path: 'user-details/:id',
+    loadChildren: () => import('./pages/user-details/user-details.module').then( m => m.UserDetailsPageModule)
+  },
+  {
+    path: 'update-warehouse/:id',
+    loadChildren: () => import('./pages/update-warehouse/update-warehouse.module').then( m => m.UpdateWarehousePageModule)
+  },
+  {
+    path: 'warehouse-details/:id',
+    loadChildren: () => import('./pages/warehouse-details/warehouse-details.module').then( m => m.WarehouseDetailsPageModule)
   }
 ];
 @NgModule({

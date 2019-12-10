@@ -16,16 +16,17 @@ export async function getWareHouses(req, res) {
     }
 }
 export async function createWareHouse(req, res) {
-    let {warehouse_address, phone_number} = req.body;
-   
+    let { warehouse_address, phone_number } = req.body;
+
     try {
         let newWareHouse = await WareHouses.create({
             warehouse_address,
             phone_number
-            
+
         }, {
             fields: ["warehouse_address", "phone_number"]
         });
+        console.log(newWareHouse);
         if (newWareHouse) {
             res.json({
                 message: "almacen creado",
@@ -78,21 +79,23 @@ export async function deleteWareHouseById(req, res) {
 }
 export async function updateWareHouseById(req, res) {
     const { id_warehouse } = req.params;
-    let {warehouse_address, phone_number} = req.body;
-    const warehouse = await WareHouses.findOne({
+    let { warehouse_address, phone_number } = req.body;
+    const oldwarehouse = await WareHouses.findOne({
         where: {
             id_warehouse
         }
     })
+    
 
-    if (warehouse != null){
-        WareHouses.update({
+    if (oldwarehouse != null) {
+        
+        oldwarehouse.update({
             warehouse_address, phone_number
         })
     }
 
     res.json({
-        data:warehouse
+        data: oldwarehouse
     })
 
 }

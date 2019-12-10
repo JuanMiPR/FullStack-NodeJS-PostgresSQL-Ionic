@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>update-warehouse</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title class="ion-text-center">
+        <b>Datos actuales</b>
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-label><b>Direccion del almacen: </b>{{oldWarehouseAddres}}</ion-label>
+      <br>
+      <ion-label><b>Numero del almacem: </b>{{oldPhoneNumber}}</ion-label>
+    </ion-card-content>
+  </ion-card>
+  <ion-button (click)="beforeUpdate()" id="beforeUpdateButton" color="success" size="small" expand="block"
+    expand="block">Actualizar</ion-button>
+  <form (ngSubmit)="updateForm()" id="updateWarehouses" [formGroup]="Form">
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Direccion del almacen </ion-label>
+            <ion-input type="text" formControlName="address" name="address"></ion-input>
+          </ion-item>
+          <div class="alert-danger" *ngIf="address.invalid && (address.dirty || address.touched)">
+
+            <div class="container-error-message" *ngIf="address.hasError('minlength')">
+              * Direccion minimo 5 caracteres
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Numero de telefono: </ion-label>
+            <ion-input inputmode="tel" formControlName="phoneNumber" name="phoneNumber"></ion-input>
+          </ion-item>
+          <div class="alert-danger" *ngIf="phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)">
+
+            <div class="container-error-message" *ngIf="phoneNumber.hasError('min')">
+              * Telefono minimo 5 numeros
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button type="submit" color="success" size="small" expand="block" expand="block">Actualizar
+            Almacen</ion-button>
+
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <br>
+  </form>
+</ion-content>
