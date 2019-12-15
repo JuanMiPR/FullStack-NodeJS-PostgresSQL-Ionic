@@ -18,8 +18,11 @@ export class buyListPage {
   constructor(private api: ApiService, private router: Router, private alertController: AlertController, private toastController: ToastController) {
     this.monthFilter = "00";
     this.user = JSON.parse(localStorage.getItem("User"));
-    this.loadBuys(this.user.user_id);
+    
 
+  }
+  ionViewDidEnter() {
+    this.loadBuys(this.user.user_id);
   }
   deleteBuy(id) {
     this.presentAlert("¿Seguro que desea eliminar la compra?", id);

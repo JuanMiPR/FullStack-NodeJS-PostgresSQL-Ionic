@@ -16,6 +16,9 @@ export class ProductsListPageAdmin implements OnInit {
   constructor(private api: ApiService, private router: Router, private alertController: AlertController, private toastController: ToastController) {
     this.loadProducts();
   }
+  ionViewDidEnter() {
+    this.loadProducts();
+  }
   goToAdd() {
     this.router.navigate(["/add-product"]);
   }

@@ -13,9 +13,11 @@ export class WarehousesListPage implements OnInit {
   filterText: string = '';
   Warehouses: Warehouses[] = [];
   constructor(private api: ApiService, private router: Router, private alertController: AlertController, private toastController: ToastController) {
+   
+  }
+  ionViewDidEnter() {
     this.loadWarehouses();
   }
-
   ngOnInit() {
   }
   goToAdd() {

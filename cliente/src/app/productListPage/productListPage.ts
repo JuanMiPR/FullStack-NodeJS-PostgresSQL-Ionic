@@ -11,16 +11,16 @@ import { ToastController } from '@ionic/angular';
   templateUrl: 'productListPage.html',
   styleUrls: ['productListPage.scss', '../app.component.scss']
 })
-export class productListPage  {
+export class productListPage {
 
   products: Products[] = [];
   cartProducts: Products[] = [];
   filterText: string = '';
   constructor(private api: ApiService, private router: Router, private toastController: ToastController) {
     this.loadProducts();
-    
+
   }
- 
+
   async presentToast(msg: string) {
     const toast = await this.toastController.create({
       message: msg,
@@ -28,11 +28,14 @@ export class productListPage  {
     });
     toast.present();
   }
+  ionViewDidEnter() {
+    this.loadProducts();
+  }
   loadProducts() {
     this.api.getProducts().subscribe(data => {
       this.products = data['data'];
     }, error => {
-    
+
     });
   }
   loadCart() {

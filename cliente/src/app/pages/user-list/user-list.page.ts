@@ -13,9 +13,11 @@ export class UserListPage implements OnInit {
   filterText: string = '';
   Users: Users[];
   constructor(private api: ApiService, private router: Router, private alertController: AlertController, private toastController: ToastController) {
+    
+  }
+  ionViewDidEnter() {
     this.loadUsers();
   }
-
   userDetail(id: number) {
     this.router.navigate(["/user-details", id]);
   }
