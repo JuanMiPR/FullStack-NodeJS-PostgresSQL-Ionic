@@ -26,7 +26,7 @@ export class WarehouseDetailsPage implements OnInit {
       this.phone_number = data['data']['phone_number'];
 
     }, error => {
-      console.log(error);
+      
     });
 
     this.api.getProductByIdWarehouse(idWarehouse).subscribe((data) => {

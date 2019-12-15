@@ -19,24 +19,19 @@ export async function getUsers(req, res) {
 }
 
 export async function singoutUser(req, res) {
-
-    const verified = jwt.verify(req.header("auth_token"), process.env.TOKEN_SECRET);
-    let email = verified['user_email'];
-
-
-
-
-
+    let { id_user } = req.params;
     try {
         const user = await users.findOne({
             where: {
-                user_email: email
+                id_user
             }
         });
+       
         user.update({
             auth_token: null
         })
-        res.send("user desconected");
+        res.json({
+            data:"user desconected"});
     }
     catch (e) {
         res.status(500).json({
@@ -46,23 +41,22 @@ export async function singoutUser(req, res) {
     }
 }
 export async function createUser(req, res) {
-    let { user_name, user_email, password, user_rol,user_type, image_profile } = req.body;
-    console.log(req);
+    let { user_name, user_email, password, user_rol, user_type, image_profile } = req.body;
     const user = await users.findOne({
         where: {
             user_email
         }
     });
-     user_type = "Normal";
-     user_rol = "Normal";
+    user_type = "Normal";
+    if (user_rol == undefined) {
+        user_rol = "Normal"
+    }
     const auth_token = null;
     if (user) {
         res.json({
             message: "existe un usuario con ese email"
         });
-
     } else {
-
         password = cryptr.encrypt(password);
         try {
             let newUser = await users.create({
@@ -73,7 +67,6 @@ export async function createUser(req, res) {
                 user_email,
                 user_type,
                 auth_token
-
             }, {
                 fields: ['user_name', "auth_token", "image_profile", "user_type", "user_email", "password", "user_rol"]
             });
@@ -82,10 +75,8 @@ export async function createUser(req, res) {
                     message: "usuario creado",
                     data: newUser
                 })
-
             }
         } catch (e) {
-            console.log(e);
             res.status(500).json({
                 message: "usuario no creado",
                 data: {}
@@ -101,7 +92,7 @@ export async function getUserById(req, res) {
                 id_user
             }
         });
-        console.log(user);
+        
         res.json({
             data: user
         });

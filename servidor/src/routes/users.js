@@ -6,7 +6,7 @@ const verify = require("../controllers/verifyToken.controller");
 import { createUser,  singoutUser, getUsers, getUserById, deleteUserById, updateUserById } from "../controllers/users.controller";
 
 router.post('/singup', createUser);
-router.post('/singout',verify ,singoutUser);
+router.get('/singout/:id_user',verify ,singoutUser);
 router.get("/all", verify, getUsers);
 router.get("/:id_user", verify, getUserById);
 router.delete("/:id_user", verify, deleteUserById);

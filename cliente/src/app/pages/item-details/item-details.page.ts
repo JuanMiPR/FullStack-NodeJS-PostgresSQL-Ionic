@@ -24,7 +24,7 @@ export class ItemDetailsPage implements OnInit {
       this.product_stock = data['data']['product_stock'];
 
     }, error => {
-      console.log(error);
+      
     });
   }
 

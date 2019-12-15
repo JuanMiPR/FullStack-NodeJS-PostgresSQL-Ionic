@@ -13,8 +13,6 @@ export class AddWarehousePage implements OnInit {
   constructor(private api: ApiService, private router: Router, private toastController: ToastController) {
     this.Form = this.createFormGroup();
   }
-
-
   ngOnInit() {
   }
 
@@ -35,23 +33,17 @@ export class AddWarehousePage implements OnInit {
   addForm() {
 
     if (this.Form.valid) {
-
       let warehouseInfo = {
-
         warehouse_address: this.Form.get('address').value,
         phone_number: this.Form.get('phoneNumber').value,
-
       }
-
-
       this.api.createWarehouse(warehouseInfo).subscribe((data)=>{
-        this.router.navigate(['/warehouses-list']);
+        this.router.navigate(['/home/adminPage']);
       });
 
     } else {
       this.presentToast();
     }
-
   }
   get address() { return this.Form.get("address") }
   get phoneNumber() { return this.Form.get("phoneNumber") }

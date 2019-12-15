@@ -16,6 +16,7 @@
 </ion-header>
 
 <ion-content>
+  <h4 *ngIf="products.length === 0" class="ion-text-center"> <b>No existen productos</b></h4>
   <ion-list>
     <ion-item-sliding *ngFor=" let prod of products | filter:filterText">
       <ion-item (click)="itemDetail(prod.id_product)" detail>

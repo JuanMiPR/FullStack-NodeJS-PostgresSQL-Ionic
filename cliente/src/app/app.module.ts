@@ -18,15 +18,13 @@ import { PipesModule } from './pipes/pipes.module';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
 
 
-
-
-
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
+
     FormsModule,
     HttpClientModule,
     PipesModule,
@@ -37,6 +35,7 @@ import { GooglePlus } from '@ionic-native/google-plus/ngx';
     AngularFireStorageModule,],
   providers: [
     StatusBar,
+
     GooglePlus,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }

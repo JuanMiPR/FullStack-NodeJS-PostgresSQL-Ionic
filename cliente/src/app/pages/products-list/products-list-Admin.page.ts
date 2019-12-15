@@ -11,7 +11,7 @@ import { AlertController, ToastController } from '@ionic/angular';
 })
 export class ProductsListPageAdmin implements OnInit {
   filterText: string = '';
-  products: Products;
+  products: Products[] =[];
 
   constructor(private api: ApiService, private router: Router, private alertController: AlertController, private toastController: ToastController) {
     this.loadProducts();
@@ -23,7 +23,7 @@ export class ProductsListPageAdmin implements OnInit {
     this.api.getProducts().subscribe(data => {
       this.products = data['data'];
     }, error => {
-      console.log(error);
+      
     });
   }
   itemDetail(id: number) {

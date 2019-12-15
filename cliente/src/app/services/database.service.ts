@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
+import { Task } from '../models/task.model';
 
-export interface Item {
-  id: number;
-  nombre: string;
-}
 
-const key = 'secret-key';
+
+const key = 'Task-key';
 @Injectable({
   providedIn: 'root'
 })
@@ -15,59 +13,68 @@ export class DatabaseService {
     private storage: Storage
   ) { }
 
-
-  addItem(item: Item): Promise<any> {
-
-    return this.storage.get(key).then((items: Item[]) => {
-      if (items) {
-        items.push(item);
-        return this.storage.set(key, items);
+  addTask(task: Task): Promise<any> {
+    return this.storage.get(key).then((tasks: Task[]) => {
+      if (tasks) {
+        tasks.push(task);
+        return this.storage.set(key, tasks);
       } else {
-        return this.storage.set(key, [item]);
+        return this.storage.set(key, [task]);
       }
-    });
+    })
   }
-  getItem(): Promise<Item[]> {
+
+  getTasks(): Promise<Task[]> {
     return this.storage.get(key);
 
   }
-  updateItem(item: Item): Promise<any> {
-    return this.storage.get(key).then((items: Item[]) => {
-      if (!items || items.length === 0) {
-        return null;
+  deleteTask(id: number): Promise<Task> {
+    return this.storage.get(key).then((tasks: Task[]) => {
+      if (!tasks || tasks.length == 0) {
+        return null
       }
-      console.log(item.id);
-      const newItem: Item[] = [];
-      for (const i of items) {
-        if (i.id === item.id) {
-          newItem.push(item);
-          
-        } else {
-          newItem.push(i);
+      let toKeepTasks: Task[] = []
+      for (const i of tasks) {
+        if (i.id_task !== id) {
+          toKeepTasks.push(i);
         }
       }
-      return this.storage.set(key, newItem);
-    });
-
+      return this.storage.set(key, toKeepTasks);
+    })
   }
-
-  deleteItem(id: number): Promise<Item> {
-    return this.storage.get(key).then((items: Item[]) => {
-      if (!items || items.length === 0) {
-        return null;
+  getTaskById(id): Promise<Task[]> {
+    return this.storage.get(key).then((tasks: Task[]) => {
+      if (!tasks || tasks.length == 0) {
+        return null
       }
+      let toKeepTasks: Task[] = []
+      for (const i of tasks) {
 
-      const toKeep: Item[] = [];
+        if (i.id_task == id) {
 
-      for (const i of items) {
-        if (i.id !== id) {
-          toKeep.push(i);
-
+          toKeepTasks.push(i);
         }
       }
-      return this.storage.set(key, toKeep);
+      return toKeepTasks;
+    })
+  }
+  updateTask(task: Task): Promise<Task[]> {
+    return this.storage.get(key).then((tasks: Task[]) => {
+      if (!tasks || tasks.length == 0) {
+        return null
+      }
+      let newTasks: Task[] = []
+      for (const i of tasks) {
+        if (i.id_task == task.id_task) {
+         
+          newTasks.push(task);
+        } else {
+          newTasks.push(i);
+        }
+      }
+      return this.storage.set(key, newTasks);
+    })
 
-    });
   }
 
 }

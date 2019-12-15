@@ -8,7 +8,7 @@ export async function getWareHouses(req, res) {
             data: wareHouses
         })
     } catch (e) {
-        console.log(e);
+       
         res.status(500).json({
             message: "no hay proveedores",
             data: {}
@@ -26,7 +26,7 @@ export async function createWareHouse(req, res) {
         }, {
             fields: ["warehouse_address", "phone_number"]
         });
-        console.log(newWareHouse);
+        
         if (newWareHouse) {
             res.json({
                 message: "almacen creado",
@@ -34,7 +34,7 @@ export async function createWareHouse(req, res) {
             })
         }
     } catch (e) {
-        console.log(e);
+        
         res.status(500).json({
             message: "almacen no creado",
             data: {}
@@ -55,7 +55,7 @@ export async function getWareHouseById(req, res) {
         });
     }
     catch (e) {
-        console.log(e);
+       
         res.status(500).json({
             message: "almacen no encontrado",
             data: {}

@@ -1,12 +1,12 @@
-import {Router} from "express";
+import { Router } from "express";
 const router = Router();
-import {createBuy,getBuys,getBuyByIdBuy,getBuyById,deleteBuyById} from "../controllers/buy.controller";
-
-router.post('/',createBuy);
-router.get("/",getBuys);
-router.get("/:id_user",getBuyById);
-router.get("/buy/:id_buy",getBuyByIdBuy);
-router.delete("/:id_buy",deleteBuyById);
+import { createBuy, getBuys, getBuyByIdBuy, getBuyById, deleteBuyById } from "../controllers/buy.controller";
+const verify = require("../controllers/verifyToken.controller");
+router.post('/', verify, createBuy);
+router.get("/", verify, getBuys);
+router.get("/:id_user", verify, getBuyById);
+router.get("/buy/:id_buy", verify, getBuyByIdBuy);
+router.delete("/:id_buy", verify, deleteBuyById);
 
 
 export default router;

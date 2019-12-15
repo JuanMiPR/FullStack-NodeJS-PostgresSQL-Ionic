@@ -28,7 +28,7 @@ export class UserListPage implements OnInit {
     this.api.getUsers().subscribe(data => {
       this.Users = data['data'];
     }, error => {
-      console.log(error);
+     
     });
   }
   updateUser(user: Users) {

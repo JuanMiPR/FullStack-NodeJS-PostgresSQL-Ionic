@@ -69,6 +69,22 @@ const routes: Routes = [
   {
     path: 'warehouse-details/:id',
     loadChildren: () => import('./pages/warehouse-details/warehouse-details.module').then( m => m.WarehouseDetailsPageModule)
+  },
+  {
+    path: 'admin-tasks',
+    loadChildren: () => import('./pages/admin-tasks/admin-tasks.module').then( m => m.AdminTasksPageModule)
+  },
+  {
+    path: 'task-details/:id',
+    loadChildren: () => import('./pages/task-details/task-details.module').then( m => m.TaskDetailsPageModule)
+  },
+  {
+    path: 'add-task',
+    loadChildren: () => import('./pages/add-task/add-task.module').then( m => m.AddTaskPageModule)
+  },
+  {
+    path: 'update-task/:id',
+    loadChildren: () => import('./pages/update-task/update-task.module').then( m => m.UpdateTaskPageModule)
   }
 ];
 @NgModule({

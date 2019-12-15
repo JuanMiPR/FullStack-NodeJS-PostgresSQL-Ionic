@@ -8,14 +8,12 @@ import { Component, OnInit } from '@angular/core';
 export class home implements OnInit {
   ngOnInit(): void {
     let user = JSON.parse(localStorage.getItem("User"));
-
-    if (user!= null) {
-      if (user['user_rol'].toLowerCase() === "admin") {
+    if (user != null) {
+      if (user['user_rol'] === "admin") {
         document.getElementById("admin").style.display = "block";
       }
     }
   }
-
   constructor() { }
 
 }

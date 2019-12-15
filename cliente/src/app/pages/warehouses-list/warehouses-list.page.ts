@@ -11,7 +11,7 @@ import { AlertController, ToastController } from '@ionic/angular';
 })
 export class WarehousesListPage implements OnInit {
   filterText: string = '';
-  Warehouses: Warehouses[];
+  Warehouses: Warehouses[] = [];
   constructor(private api: ApiService, private router: Router, private alertController: AlertController, private toastController: ToastController) {
     this.loadWarehouses();
   }
@@ -76,7 +76,7 @@ export class WarehousesListPage implements OnInit {
     this.api.getWarehouses().subscribe(data => {
       this.Warehouses = data['data'];
     }, error => {
-      console.log(error);
+    
     });
   }
 }

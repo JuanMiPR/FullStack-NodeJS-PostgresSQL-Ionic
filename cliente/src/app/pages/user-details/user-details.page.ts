@@ -33,7 +33,7 @@ export class UserDetailsPage implements OnInit {
 
 
     }, error => {
-      console.log(error);
+   
     });
   }
 }

@@ -35,7 +35,7 @@ export class UpdateUserPage implements OnInit {
 
 
     }, error => {
-      console.log(error);
+    
     });
   }
   ngOnInit() {
@@ -73,7 +73,7 @@ export class UpdateUserPage implements OnInit {
       }
       let userInfo = {
         "user_name": name,
-        "user_rol": rol,
+        "user_rol": rol.toLowerCase(),
         "user_email": email,
       }
       this.api.updateUser(this.idUser, userInfo).subscribe((data) => {
@@ -83,7 +83,7 @@ export class UpdateUserPage implements OnInit {
       })
 
     } else {
-      console.log("no valido")
+   
     }
 
   }

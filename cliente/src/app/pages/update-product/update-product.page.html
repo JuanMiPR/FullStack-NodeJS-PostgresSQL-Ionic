@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button text="" defaultHref="/products-list"></ion-back-button>
+      <ion-back-button text="" defaultHref="products-list-admin"></ion-back-button>
     </ion-buttons>
     <ion-title class="titles">Actualize el producto</ion-title>
   </ion-toolbar>
@@ -52,15 +52,17 @@
     <div>
       <ion-item>
         <ion-label>Almacen</ion-label>
-        <ion-select *ngFor="let warehouse of warehouses" formControlName="warehouseSelected">
-          <ion-select-option>{{warehouse.id_warehouse}}</ion-select-option>
+        <ion-select formControlName="warehouseSelected">
+          <ion-item *ngFor="let warehouse of warehouses">
+            <ion-select-option>{{warehouse.id_warehouse}}</ion-select-option>
+          </ion-item>
         </ion-select>
       </ion-item>
     </div>
     <div>
-      <ion-button type="submit" color="success" size="small" expand="block" >
+      <ion-button type="submit" color="success" size="small" expand="block">
         Actualizar Producto</ion-button>
-     
+
     </div>
   </form>
   <br>

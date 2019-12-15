@@ -11,6 +11,7 @@
 </ion-header>
 
 <ion-content>
+ 
   <ion-list>
     <ion-item-sliding *ngFor=" let user of Users | filterUser:filterText">
       <ion-item (click)="userDetail(user.id_user)" detail>

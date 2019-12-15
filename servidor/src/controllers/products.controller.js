@@ -7,7 +7,7 @@ export async function getProducts(req, res) {
             data: Products
         })
     } catch (e) {
-        console.log(e);
+        
         res.status(500).json({
             message: "fallo de conexion",
             data: {}
@@ -17,7 +17,7 @@ export async function getProducts(req, res) {
 export async function createProduct(req, res) {
 
     let { product_name, product_stock, id_warehouse, product_image } = req.body;
-    console.log(product_name);
+   
     try {
         let newProduct = await products.create({
             product_name,
@@ -33,7 +33,7 @@ export async function createProduct(req, res) {
             })
         }
     } catch (e) {
-        console.log(e);
+        
         res.status(500).json({
             message: "producto no creado",
             data: {}

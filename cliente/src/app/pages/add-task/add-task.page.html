@@ -1,0 +1,63 @@
+<ion-menu persistent="true" side="start" type="overlay" menuId="second" contentId="content2">
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-title>Tareas</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content id="content2">
+    <ion-button color="success" size="small" expand="block" (click)=" goToTasks()">Ir a tareas</ion-button>
+    <ion-button color="success" size="small" expand="block" (click)=" goToCreateTasks()">Crear tareas</ion-button>
+  </ion-content>
+</ion-menu>
+
+<ion-header no-border>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="" defaultHref="/admin-tasks"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="titles">Añadir tarea</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="toggleMenu()">
+        <ion-icon slot="icon-only" name="menu"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form (ngSubmit)="addForm()" [formGroup]="Form">
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Titulo de la nota</ion-label>
+            <ion-input type="text" formControlName="title" name="tilte"></ion-input>
+          </ion-item>
+          <div class="alert-danger" *ngIf="title.invalid && (title.dirty || title.touched)">
+            <div class="container-error-message" *ngIf="title.hasError('required')">
+              * El Titulo es obligatorio
+            </div>
+            <div class="container-error-message" *ngIf="title.hasError('minlength')">
+              * Titulo minimo 3 caracteres
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Nota</ion-label>
+            <ion-textarea formControlName='note' placeholder="Texto aqui...">
+            </ion-textarea>
+          </ion-item>
+
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button type="submit" color="success" size="small" expand="block">Crear Tarea</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

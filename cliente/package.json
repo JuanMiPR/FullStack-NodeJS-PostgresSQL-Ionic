@@ -22,6 +22,7 @@
     "@angular/router": "~8.1.2",
     "@ionic-native/core": "^5.0.0",
     "@ionic-native/google-plus": "^5.17.1",
+    "@ionic-native/native-storage": "^5.18.0",
     "@ionic-native/splash-screen": "^5.0.0",
     "@ionic-native/sqlite": "^5.17.0",
     "@ionic-native/sqlite-porter": "^5.17.0",
@@ -35,6 +36,7 @@
     "cordova-plugin-androidx-adapter": "^1.1.0",
     "cordova-plugin-firebasex": "^7.0.1",
     "cordova-plugin-googleplus": "^8.2.1",
+    "cordova-plugin-nativestorage": "^2.3.2",
     "cordova-sqlite-storage": "^3.4.0",
     "core-js": "^2.5.4",
     "firebase": "^7.5.0",
@@ -93,7 +95,8 @@
       "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-firebasex": {},
       "cordova-plugin-androidx": {},
-      "cordova-plugin-androidx-adapter": {}
+      "cordova-plugin-androidx-adapter": {},
+      "cordova-plugin-nativestorage": {}
     },
     "platforms": [
       "android"

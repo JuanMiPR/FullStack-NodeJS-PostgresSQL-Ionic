@@ -42,7 +42,7 @@ export class RegisterPage implements OnInit {
 
   logForm() {
     if (this.registerForm.valid) {
-      console.log();
+      
 
       let userInfo = {
         "user_name": this.registerForm.get('name').value + " " +  this.registerForm.get('surname').value,
@@ -55,14 +55,13 @@ export class RegisterPage implements OnInit {
       }
 
       this.api.createUser(userInfo).subscribe(() => {
-        console.log("funcionó la llamada");
+        
         this.router.navigate(["/login"]);
       }), error => {
-        console.log("fallo en la llamada");
-        console.log(error);
+      
       }
     } else {
-      console.log("no valido")
+      
     }
 
   }

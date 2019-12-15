@@ -1,7 +1,7 @@
 <ion-header no-border>
-  <ion-toolbar >
+  <ion-toolbar>
 
-    <ion-title    class="ion-text-center titles">
+    <ion-title class="ion-text-center titles">
       Lista de Productos
     </ion-title>
 
@@ -15,13 +15,13 @@
 </ion-header>
 
 <ion-content>
-  
+  <h4 *ngIf="products.length === 0" class="ion-text-center"> <b>No existen productos</b></h4>
   <ion-list>
     <ion-item-sliding *ngFor=" let prod of products | filter:filterText">
       <ion-item (click)="itemDetail(prod.id_product)" detail>
-          <ion-img src="{{prod.product_image}}"  id="imgList"alt="{{prod.product_name}}"></ion-img>
-        
-        
+        <ion-img src="{{prod.product_image}}" id="imgList" alt="{{prod.product_name}}"></ion-img>
+
+
       </ion-item>
       <ion-item-options side="end">
         <ion-item-option (click)="addToCart(prod)">

@@ -24,35 +24,28 @@ export class CartPagePage implements OnInit {
   getBuybyid(id_buy) {
     this.api.getBuyByIdBuy(id_buy).subscribe((data) => {
       if (data['data'].length === 0) {
-        console.log("no esta");
         this.buy(id_buy);
       }
       else {
         this.getIdBuy();
       }
-    }, error => {
-      console.log(error);
-    });
+    }, error => {});
   }
   buy(id_buy) {
     var today = new Date()
     let paymentType;
     const user_address = this.addressTextField;
     let date = (today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate());
-
     const user = JSON.parse(localStorage.getItem("User"));
-
     if (document.getElementById('Cash')['checked']) {
       paymentType = "Efectivo";
     } else {
       paymentType = "Tarjeta"
     };
     if (user_address == undefined || user_address.length < 5) {
-
       document.getElementById('addressError').style.display = "block";
     } else {
       document.getElementById('addressError').style.display = "none";
-      console.log(user_address);
       this.cartItems.forEach(element => {
         let quantity = document.getElementById("quantity:" + element.id_product)['value'];
         if (quantity == '') {
@@ -69,9 +62,7 @@ export class CartPagePage implements OnInit {
         }
         this.api.postBuy(buy).subscribe((data) => {
 
-        }, error => {
-          console.log(error);
-        });
+        }, error => {});
       });
       this.deleteBuy();
     }
@@ -83,7 +74,6 @@ export class CartPagePage implements OnInit {
   }
   ngOnInit() {
   }
-
   loadCartItems() {
     this.cartItems = JSON.parse(localStorage.getItem("cartProducts"));
     if (this.cartItems == null) {

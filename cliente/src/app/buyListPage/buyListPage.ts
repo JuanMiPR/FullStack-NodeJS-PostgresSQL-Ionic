@@ -24,11 +24,7 @@ export class buyListPage {
   deleteBuy(id) {
     this.presentAlert("¿Seguro que desea eliminar la compra?", id);
   }
-  verBuys() {
-    console.log(this.auxFilter);
-  }
   loadBuys(id_user: number) {
-
     this.api.getBuyByIdUser(id_user).subscribe((data) => {
       this.Buys = data['data'];
       this.orderBuys();
@@ -86,7 +82,6 @@ export class buyListPage {
         }
       ]
     });
-
     await alert.present();
   }
 }

@@ -34,7 +34,7 @@ export class UpdateWarehousePage implements OnInit {
 
 
     }, error => {
-      console.log(error);
+     
     });
   }
   updateForm() {
@@ -63,7 +63,7 @@ export class UpdateWarehousePage implements OnInit {
       })
 
     } else {
-      console.log("no valido")
+     
     }
 
   }

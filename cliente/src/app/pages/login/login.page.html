@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header no-border>
   <ion-toolbar style="text-align: center;">
     <ion-title class="titles">Inicio</ion-title>
   </ion-toolbar>
@@ -7,14 +7,11 @@
 <ion-content fullScreen>
   <br>
   <div class="ion-text-center">
-      
     <img src="../../../assets/Logo.png" style="width: 35%; height: 40%;" />
   </div>
-  <ion-grid fixed>
 
-    <form (ngSubmit)="logForm()" [formGroup]="registerForm">
-
-
+  <form (ngSubmit)="logForm()" [formGroup]="registerForm">
+    <ion-grid fixed>
       <ion-row>
         <ion-col>
           <ion-item style="font-size: 85%;margin-top: -5%;">
@@ -53,22 +50,14 @@
           </div>
         </ion-col>
       </ion-row>
-      <br>
-      <div class="ion-text-center">
-        <ion-button type="submit" color="success" size="small" expand="block">
-          Conectar</ion-button>
-        
-        <p style="font-size: 85%;">¿No tienes cuenta?<b routerLink ='/register'>Registrate.</b></p>
- 
-        <img src="../../../assets/GoogleLogin.png" style="width: 55%; height: 65%;" />
-        <br>
-        O
-        <br>
-        <img src="../../../assets/FacebooLogin.png" style="width: 55%; height: 65%;" />
-      </div>
 
+    </ion-grid>
+    <br>
+    <div class="ion-text-center">
+      <ion-button type="submit" color="success" size="small" expand="block">
+        Conectar</ion-button>
 
-
-    </form>
-  </ion-grid>
+      <p style="font-size: 85%;">¿No tienes cuenta?<b routerLink='/register'>Registrate.</b></p>
+    </div>
+  </form>
 </ion-content>

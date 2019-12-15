@@ -60,7 +60,7 @@ passport.use(new FacebookStrategy({
   profileFields: ['id', 'emails', 'name','picture.type(large)']
 },
 async function(accessToken, refreshToken, profile, done) {
-  console.log(accessToken);
+  
   let user_email = profile.emails[0].value;
   let user_name = profile.name.givenName;
   let password = profile.id;

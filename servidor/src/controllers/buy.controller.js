@@ -8,7 +8,7 @@ export async function getBuys(req, res) {
             data: Buys
         })
     } catch (e) {
-        console.log(e);
+        
         res.status(500).json({
             message: "no hay compras",
             data: {}
@@ -32,7 +32,7 @@ export async function createBuy(req, res) {
             })
         }
     } catch (e) {
-        console.log(e);
+        
         res.status(500).json({
             message: "compra no creada",
             data: {}

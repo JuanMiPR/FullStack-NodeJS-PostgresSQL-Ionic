@@ -3,12 +3,31 @@
     <ion-title class="titles">
       Perfil
     </ion-title>
+    <ion-buttons slot="start">
+      <ion-avatar mode="ios" style="border-style: double;">
+        <ion-img src="{{imageProfile}}" alt="usuario"></ion-img>
+      </ion-avatar>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-thumbnail >
-    <ion-img style="width: 100px;border-style: solid; height: 105px;" src="{{imageProfile}}" alt=""></ion-img>
-  </ion-thumbnail>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Nombre: <br>{{user_name}}</ion-card-title>
+      <ion-card-subtitle>Email:<br> {{user_email}}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content></ion-card-content>
+  </ion-card>
+  <ion-item id="changeLetter" lines="none">
+    <ion-label position="floating">Tamaño letra</ion-label>
+    <ion-select (ionChange)="selectChanged($event)">
+      <ion-select-option value="Normal" selected>Normal</ion-select-option>
+      <ion-select-option value="Grande">Grande</ion-select-option>
+    </ion-select>
 
+  </ion-item>
+
+  <ion-button class="ion-text-center" color='danger' size="small" expand="block" expand="block" (click)="logOut()">
+    Desconectarse</ion-button>
 </ion-content>

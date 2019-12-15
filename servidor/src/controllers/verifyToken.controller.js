@@ -4,7 +4,7 @@ import users from "../models/users";
 module.exports = async function (req, res, next) {
     let token;
     token = req.header("auth_token");
-    console.log(token);
+    
 
 
 

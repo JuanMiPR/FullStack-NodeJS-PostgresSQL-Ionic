@@ -1,0 +1,64 @@
+<ion-header no-border>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="" defaultHref="/admin-tasks"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="titles">Actualizar tarea</ion-title>
+    <ion-buttons slot="end">
+
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title class="ion-text-center">
+        <b>Datos actuales</b>
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-label><b>Titulo de la tarea: </b>{{oldTaskTitle}}</ion-label>
+      <br>
+      <ion-label><b>Contenido:<br> </b>{{oldTaskContent}}</ion-label>
+    </ion-card-content>
+  </ion-card>
+  <ion-button (click)="beforeUpdate()" id="beforeUpdateButton" color="success" size="small" expand="block"
+    expand="block">Actualizar</ion-button>
+  <form (ngSubmit)="addForm()" id="updateTasks" [formGroup]="Form">
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Titulo de la nota</ion-label>
+            <ion-input type="text" formControlName="title" name="tilte"></ion-input>
+          </ion-item>
+          <div class="alert-danger" *ngIf="title.invalid && (title.dirty || title.touched)">
+            <div class="container-error-message" *ngIf="title.hasError('required')">
+              * El Titulo es obligatorio
+            </div>
+            <div class="container-error-message" *ngIf="title.hasError('minlength')">
+              * Titulo minimo 3 caracteres
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Nota</ion-label>
+            <ion-textarea formControlName='note' placeholder="Texto aqui...">
+            </ion-textarea>
+          </ion-item>
+
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button type="submit" color="success" size="small" expand="block">Actualizar Tarea</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

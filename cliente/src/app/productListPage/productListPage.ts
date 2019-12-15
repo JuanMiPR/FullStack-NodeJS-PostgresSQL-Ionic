@@ -32,7 +32,7 @@ export class productListPage  {
     this.api.getProducts().subscribe(data => {
       this.products = data['data'];
     }, error => {
-      console.log(error);
+    
     });
   }
   loadCart() {

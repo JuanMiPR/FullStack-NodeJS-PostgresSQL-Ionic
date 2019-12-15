@@ -41,7 +41,7 @@ export class UpdateProductPage implements OnInit {
       this.idProduct = data['data']['id_product'];
 
     }, error => {
-      console.log(error);
+     
     });
   }
   createFormGroup() {
@@ -81,13 +81,13 @@ export class UpdateProductPage implements OnInit {
         "product_image": this.oldProduct_image
       }
 
-      console.log(productInfo);
+     
 
 
       this.api.updateProduct(this.idProduct, productInfo).subscribe((data) => {
-        this.navigate.navigate(["/products-list"]);
+        this.navigate.navigate(['/home/adminPage']);
       }, error => {
-        console.log(error)
+        
       })
 
 
@@ -95,7 +95,7 @@ export class UpdateProductPage implements OnInit {
 
 
     } else {
-      console.log("no valido")
+    
     }
 
   }

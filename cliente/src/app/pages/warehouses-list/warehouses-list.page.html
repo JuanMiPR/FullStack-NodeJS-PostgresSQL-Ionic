@@ -16,6 +16,7 @@
 </ion-header>
 
 <ion-content>
+  <h4 *ngIf="Warehouses.length === 0" class="ion-text-center"> <b>No existen almacenes</b></h4>
   <ion-list>
     <ion-item-sliding *ngFor=" let warehouse of Warehouses | filterWarehouse:filterText">
       <ion-item (click)="warehouseDetail(warehouse.id_warehouse)" detail>

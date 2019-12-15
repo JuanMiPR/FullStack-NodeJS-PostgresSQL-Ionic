@@ -16,88 +16,123 @@ export class ApiService {
   path = 'http://localhost:40000';
   constructor(private http: HttpClient) {
 
-
-
   }
+  httpOptions;
   getToken() {
     let user = JSON.parse(localStorage.getItem("User"));
-    return user.token
+    if (user != null) {
+      return user.token
+    } else {
+      return ""
+    }
+
   }
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Auth_token': this.getToken()
-    })
+  getOptions() {
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'auth_token': this.getToken()
+      })
+    }
   }
+
+
+  logOut(id) {
+    this.getOptions();
+    return this.http.get(this.path + '/users/singout/' + id, this.httpOptions);
+  }
+
   getUserById(id) {
+    this.getOptions();
     return this.http.get<Users>(this.path + "/users/" + id, this.httpOptions);
   }
+
   getUsers() {
+    this.getOptions();
     return this.http.get<Users[]>(this.path + "/users/all", this.httpOptions);
   }
 
   deleteUser(id) {
+    this.getOptions();
     return this.http.delete(this.path + "/users/" + id, this.httpOptions);
   }
   getProductByIdWarehouse(id) {
-    return this.http.get<Products>(this.path + "/products/prod/" + id);
+    this.getOptions();
+    return this.http.get<Products>(this.path + "/products/prod/" + id, this.httpOptions);
   }
   createProduct(product) {
-    return this.http.post<Products>(this.path + '/products', product);
+    this.getOptions();
+    return this.http.post<Products>(this.path + '/products', product, this.httpOptions);
   }
   updateProduct(id, product) {
-    return this.http.put(this.path + '/products/' + id, product);
+    this.getOptions();
+    return this.http.put(this.path + '/products/' + id, product, this.httpOptions);
   }
   updateUser(id, user) {
+    this.getOptions();
     return this.http.put(this.path + '/users/' + id, user, this.httpOptions);
   }
   deleteBuy(id) {
-    return this.http.delete(this.path + '/buys/' + id);
+    this.getOptions();
+    return this.http.delete(this.path + '/buys/' + id, this.httpOptions);
   }
   getWarehouses() {
-    return this.http.get<Warehouses[]>(this.path + '/wareHouses');
+    this.getOptions();
+    return this.http.get<Warehouses[]>(this.path + '/wareHouses', this.httpOptions);
   }
   getWarehouseById(id) {
-    return this.http.get<Warehouses[]>(this.path + '/wareHouses/' + id);
+    this.getOptions();
+    return this.http.get<Warehouses[]>(this.path + '/wareHouses/' + id, this.httpOptions);
   }
   createWarehouse(warehouse) {
+    this.getOptions();
     return this.http.post(this.path + '/warehouses', warehouse, this.httpOptions);
   }
   updateWarehouse(id, warehouse) {
+    this.getOptions();
     return this.http.put(this.path + '/warehouses/' + id, warehouse, this.httpOptions);
   }
   deleteWarehouse(id) {
+    this.getOptions();
     return this.http.delete(this.path + "/warehouses/" + id, this.httpOptions);
   }
   getProducts() {
+    this.getOptions();
 
-    return this.http.get<Products[]>(this.path + '/products');
+    return this.http.get<Products[]>(this.path + '/products', this.httpOptions);
 
   }
   getBuyByIdBuy(id_buy) {
-    return this.http.get<Buys>(this.path + "/buys/buy/" + id_buy);
+    this.getOptions();
+    return this.http.get<Buys>(this.path + "/buys/buy/" + id_buy, this.httpOptions);
   }
   getBuyByIdUser(id_user) {
-    return this.http.get<Buys[]>(this.path + "/buys/" + id_user);
+    this.getOptions();
+    return this.http.get<Buys[]>(this.path + "/buys/" + id_user, this.httpOptions);
   }
   postBuy(buy) {
-    return this.http.post<Buys>(this.path + "/buys", buy);
+    this.getOptions();
+    return this.http.post<Buys>(this.path + "/buys", buy, this.httpOptions);
 
   }
   deleteProduct(id) {
-    return this.http.delete<Products>(this.path + "/products/" + id);
+    this.getOptions();
+    return this.http.delete<Products>(this.path + "/products/" + id, this.httpOptions);
   }
 
   createUser(user) {
-    return this.http.post<User>(this.path + "/users/singup", user);
+    this.getOptions();
+    return this.http.post<User>(this.path + "/users/singup", user, this.httpOptions);
   }
 
   login(userInfo) {
-    return this.http.post<User[]>(this.path + "/login/normal", userInfo);
+    this.getOptions();
+    return this.http.post<User[]>(this.path + "/login/normal", userInfo, this.httpOptions);
 
   }
   getProductbyId(id) {
+    this.getOptions();
 
-    return this.http.get<Products[]>(this.path + "/products/" + id);
+    return this.http.get<Products[]>(this.path + "/products/" + id, this.httpOptions);
   }
 
 

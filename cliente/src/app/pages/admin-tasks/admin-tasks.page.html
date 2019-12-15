@@ -1,0 +1,48 @@
+<ion-menu persistent=“true” side="start" menuId="first" type="overlay" contentId="content">
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-title>Tareas</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content id="content">
+    <ion-button color="success" size="small" expand="block" (click)=" goToTasks()">Ir a tareas</ion-button>
+    <ion-button color="success" size="small" expand="block" (click)=" goToCreateTasks()">Crear tareas</ion-button>
+  </ion-content>
+</ion-menu>
+
+<ion-header no-border>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="" defaultHref="/home/adminPage"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="titles">Lista de tareas</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="toggleMenu()">
+        <ion-icon slot="icon-only" name="menu"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <h4 *ngIf="tasks.length === 0" class="ion-text-center"> <b>No existen tareas</b></h4>
+  <ion-list>
+    <ion-item-sliding *ngFor=" let task of tasks">
+      <ion-item (click)="taskDetail(task)" detail>
+        <ion-label class="ion-text-center"><b>{{task.tittle}}</b></ion-label>
+
+
+      </ion-item>
+      <ion-item-options side="end">
+        <ion-item-option (click)="deleteTask(task)" color="secundary">
+          <ion-icon name="trash" color="danger" slot="icon-only" style="font-size:20px ;">
+          </ion-icon>
+        </ion-item-option>
+        <ion-item-option (click)="updateTask(task)" color="secundary" style="font-size:15px ;">
+          <ion-icon name="albums" color="success" slot="icon-only">
+          </ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>
