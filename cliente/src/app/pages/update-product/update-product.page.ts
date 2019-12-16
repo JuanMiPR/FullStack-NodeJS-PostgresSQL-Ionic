@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { Observable, from } from 'rxjs';
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AngularFireStorage, AngularFireStorageReference } from 'angularfire2/storage';
-import { finalize } from 'rxjs/operators';
+
 import { ApiService } from '../../services/api.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Warehouses } from '../../models/warehouse.model';
@@ -21,7 +21,7 @@ export class UpdateProductPage implements OnInit {
   warehouses: Warehouses[] = [];
   filePath: string;
   idProduct: number;
-  constructor(private imageUpload: AngularFireStorage, private router: ActivatedRoute, private navigate:Router,private api: ApiService) {
+  constructor(private imageUpload: AngularFireStorage, private router: ActivatedRoute, private navigate: Router, private api: ApiService) {
     this.getProductInfo();
     this.Form = this.createFormGroup();
     this.getWarehouses();
@@ -31,17 +31,15 @@ export class UpdateProductPage implements OnInit {
   }
 
   getProductInfo() {
-    let idProduct = this.router.snapshot.paramMap.get("id");
+    const idProduct = this.router.snapshot.paramMap.get('id');
     this.api.getProductbyId(idProduct).subscribe(data => {
-
       this.oldProduct_image = data['data']['product_image'];
       this.oldProduct_name = data['data']['product_name'];
       this.oldProduct_stock = data['data']['product_stock'];
       this.oldIdWarehouse = data['data']['id_warehouse'];
       this.idProduct = data['data']['id_product'];
-
     }, error => {
-     
+
     });
   }
   createFormGroup() {
@@ -51,7 +49,7 @@ export class UpdateProductPage implements OnInit {
       stock: new FormControl('', [Validators.min(1)]),
 
       warehouseSelected: new FormControl('')
-    })
+    });
   }
   updateForm() {
 
@@ -60,43 +58,36 @@ export class UpdateProductPage implements OnInit {
       let productName: string;
       let productStock: number;
       if (this.Form.get('warehouseSelected').value === '') {
-        idWarehouse = this.oldIdWarehouse
+        idWarehouse = this.oldIdWarehouse;
       } else {
-        idWarehouse = this.Form.get('warehouseSelected').value
+        idWarehouse = this.Form.get('warehouseSelected').value;
       }
       if (this.Form.get('name').value === '') {
-        productName = this.oldProduct_name
+        productName = this.oldProduct_name;
       } else {
-        productName = this.Form.get('name').value
+        productName = this.Form.get('name').value;
       }
       if (this.Form.get('stock').value === '') {
-        productStock = this.oldProduct_stock
+        productStock = this.oldProduct_stock;
       } else {
-        productStock = this.Form.get('stock').value
+        productStock = this.Form.get('stock').value;
       }
-      let productInfo = {
-        "id_warehouse": idWarehouse,
-        "product_name": productName,
-        "product_stock": productStock,
-        "product_image": this.oldProduct_image
-      }
+      const productInfo = {
+        id_warehouse: idWarehouse,
+        product_name: productName,
+        product_stock: productStock,
+        product_image: this.oldProduct_image
+      };
 
-     
+
 
 
       this.api.updateProduct(this.idProduct, productInfo).subscribe((data) => {
         this.navigate.navigate(['/home/adminPage']);
       }, error => {
-        
-      })
 
-
-
-
-
-    } else {
-    
-    }
+      });
+    } else { }
 
   }
   getWarehouses() {
@@ -107,9 +98,15 @@ export class UpdateProductPage implements OnInit {
     })
   }
 
-  get name() { return this.Form.get("name") }
-  get warehouseSelected() { return this.Form.get("warehouseSelected") }
-  get stock() { return this.Form.get("stock") }
+  get name() {
+    return this.Form.get('name');
+  }
+  get warehouseSelected() {
+    return this.Form.get('warehouseSelected');
+  }
+  get stock() {
+    return this.Form.get('stock');
+  }
 
 
   beforeUpdate() {

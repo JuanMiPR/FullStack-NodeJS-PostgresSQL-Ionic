@@ -15,17 +15,16 @@ export class buyListPage {
   monthFilter: string;
   auxFilter;
   user;
-  constructor(private api: ApiService, private router: Router, private alertController: AlertController, private toastController: ToastController) {
-    this.monthFilter = "00";
-    this.user = JSON.parse(localStorage.getItem("User"));
-    
-
+  constructor(private api: ApiService, private router: Router, private alertController: AlertController, 
+              private toastController: ToastController) {
+    this.monthFilter = '00';
+    this.user = JSON.parse(localStorage.getItem('User'));
   }
   ionViewDidEnter() {
     this.loadBuys(this.user.user_id);
   }
   deleteBuy(id) {
-    this.presentAlert("¿Seguro que desea eliminar la compra?", id);
+    this.presentAlert('¿Seguro que desea eliminar la compra?', id);
   }
   loadBuys(id_user: number) {
     this.api.getBuyByIdUser(id_user).subscribe((data) => {
@@ -38,7 +37,7 @@ export class buyListPage {
     this.monthFilter = event.detail['value'];
   }
   goToBuyDetail(buy: Buys) {
-    this.router.navigate(["buy-details/" + buy.id_buy]);
+    this.router.navigate(['buy-details/' + buy.id_buy]);
   }
   orderBuys() {
     const hash = {};
@@ -49,7 +48,7 @@ export class buyListPage {
     });
   }
   goToCart() {
-    this.router.navigate(["/cart-page"]);
+    this.router.navigate(['/cart-page']);
   }
   async presentToast(msg: string) {
     const toast = await this.toastController.create({
@@ -76,9 +75,9 @@ export class buyListPage {
           handler: () => {
             this.api.deleteBuy(id).subscribe((data) => {
               this.loadBuys(this.user.user_id);
-              this.presentToast("Compra eliminada");
+              this.presentToast('Compra eliminada');
             }, error => {
-              this.presentToast("Fallo al eliminar");
+              this.presentToast('Fallo al eliminar');
             });
 
           }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/services/api.service';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
@@ -33,11 +33,11 @@ export class AddWarehousePage implements OnInit {
   addForm() {
 
     if (this.Form.valid) {
-      let warehouseInfo = {
+      const warehouseInfo = {
         warehouse_address: this.Form.get('address').value,
         phone_number: this.Form.get('phoneNumber').value,
       }
-      this.api.createWarehouse(warehouseInfo).subscribe((data)=>{
+      this.api.createWarehouse(warehouseInfo).subscribe((data) => {
         this.router.navigate(['/home/adminPage']);
       });
 
@@ -45,7 +45,11 @@ export class AddWarehousePage implements OnInit {
       this.presentToast();
     }
   }
-  get address() { return this.Form.get("address") }
-  get phoneNumber() { return this.Form.get("phoneNumber") }
+  get address() {
+    return this.Form.get('address');
+  }
+  get phoneNumber() {
+    return this.Form.get('phoneNumber');
+  }
 
 }

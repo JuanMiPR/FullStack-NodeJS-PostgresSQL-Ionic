@@ -11,13 +11,13 @@ export class BuyDetailsPage implements OnInit {
   idBuy: string;
   buyDetails: Buys;
   constructor(private router: ActivatedRoute, private api: ApiService) {
-    this.idBuy = this.router.snapshot.paramMap.get("id");
+    this.idBuy = this.router.snapshot.paramMap.get('id');
     this.getBuyDetails();
   }
   getBuyDetails() {
     this.api.getBuyByIdBuy(this.idBuy).subscribe((data) => {
       this.buyDetails = data['data'];
-    }, error => {})
+    }, error => {});
   }
   ngOnInit() {
   }

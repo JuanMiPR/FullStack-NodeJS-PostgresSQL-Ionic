@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MenuController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { Task } from '../../models/task.model';
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DatabaseService } from '../../services/database.service';
 
 @Component({
@@ -18,21 +18,21 @@ export class AddTaskPage implements OnInit {
   createFormGroup() {
     return new FormGroup({
       title: new FormControl('', [Validators.required, Validators.minLength(3)]),
-      note: new FormControl('',Validators.maxLength(150))
+      note: new FormControl('', Validators.maxLength(150))
     })
   }
   addForm() {
     if (this.Form.valid) {
-      let id = Math.floor(Math.random() * 9999) + 1;
-      let task: Task = {
+      const id = Math.floor(Math.random() * 9999) + 1;
+      const task: Task = {
         id_task: id,
-        tittle: this.Form.get("title").value,
+        tittle: this.Form.get('title').value,
         content: this.Form.get('note').value
       }
       this.database.addTask(task).then(task => {
         this.router.navigate(['/home/adminPage']);
-      })
-    } else {}
+      });
+    } else { }
   }
   ngOnInit() {
   }
@@ -45,6 +45,10 @@ export class AddTaskPage implements OnInit {
   goToCreateTasks() {
     this.router.navigate(['/add-task']);
   }
-  get title() { return this.Form.get("title") }
-  get note() { return this.Form.get("note") }
+  get title() {
+    return this.Form.get('title');
+  }
+  get note() {
+    return this.Form.get('note');
+  }
 }

@@ -15,7 +15,7 @@ export class productListPage {
 
   products: Products[] = [];
   cartProducts: Products[] = [];
-  filterText: string = '';
+  filterText = '';
   constructor(private api: ApiService, private router: Router, private toastController: ToastController) {
     this.loadProducts();
 
@@ -39,17 +39,17 @@ export class productListPage {
     });
   }
   loadCart() {
-    this.cartProducts = JSON.parse(localStorage.getItem("cartProducts"));
+    this.cartProducts = JSON.parse(localStorage.getItem('cartProducts'));
 
     if (this.cartProducts == null) {
       this.cartProducts = [];
     }
   }
   itemDetail(id: number) {
-    this.router.navigate(["/item-details", id]);
+    this.router.navigate(['/item-details', id]);
   }
   goToCart() {
-    this.router.navigate(["/cart-page"]);
+    this.router.navigate(['/cart-page']);
   }
   addToCart(prod: Products) {
     this.loadCart();
@@ -63,11 +63,11 @@ export class productListPage {
       this.presentToast('Ya tiene añadido el producto');
     } else {
       this.cartProducts.push(prod);
-      localStorage.setItem("cartProducts", JSON.stringify(this.cartProducts));
+      localStorage.setItem('cartProducts', JSON.stringify(this.cartProducts));
     }
   }
   search(event) {
-    this.filterText = event.detail.value
+    this.filterText = event.detail.value;
   }
 
 }

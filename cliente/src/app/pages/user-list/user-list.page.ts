@@ -12,17 +12,18 @@ import { AlertController, ToastController } from '@ionic/angular';
 export class UserListPage implements OnInit {
   filterText: string = '';
   Users: Users[];
-  constructor(private api: ApiService, private router: Router, private alertController: AlertController, private toastController: ToastController) {
-    
+  constructor(private api: ApiService, private router: Router, private alertController: AlertController,
+              private toastController: ToastController) {
+
   }
   ionViewDidEnter() {
     this.loadUsers();
   }
   userDetail(id: number) {
-    this.router.navigate(["/user-details", id]);
+    this.router.navigate(['/user-details', id]);
   }
   search(event) {
-    this.filterText = event.detail.value
+    this.filterText = event.detail.value;
   }
   ngOnInit() {
   }
@@ -30,15 +31,15 @@ export class UserListPage implements OnInit {
     this.api.getUsers().subscribe(data => {
       this.Users = data['data'];
     }, error => {
-     
+
     });
   }
   updateUser(user: Users) {
-    this.router.navigate(["/update-user/" + user.id_user]);
+    this.router.navigate(['/update-user/' + user.id_user]);
   }
   deleteUser(user: Users) {
 
-    this.presentAlert("¿Seguro que desea eliminar el Usuario?", user.id_user);
+    this.presentAlert('¿Seguro que desea eliminar el Usuario?', user.id_user);
   }
   async presentToast(msg: string) {
     const toast = await this.toastController.create({
@@ -66,10 +67,10 @@ export class UserListPage implements OnInit {
 
             this.api.deleteUser(id).subscribe((data) => {
               this.loadUsers();
-              this.presentToast("Usuario eliminado");
+              this.presentToast('Usuario eliminado');
             }, error => {
 
-              this.presentToast("Fallo al eliminar");
+              this.presentToast('Fallo al eliminar');
             });
 
           }

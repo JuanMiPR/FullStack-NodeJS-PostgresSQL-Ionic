@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Task } from '../../models/task.model';
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DatabaseService } from '../../services/database.service';
 @Component({
   selector: 'app-update-task',
   templateUrl: './update-task.page.html',
-  styleUrls: ['./update-task.page.scss'],
+  styleUrls: ['./update-task.page.scss', '../../app.component.scss'],
 })
 export class UpdateTaskPage implements OnInit {
   Form: FormGroup;
@@ -21,10 +21,10 @@ export class UpdateTaskPage implements OnInit {
   ngOnInit() {
   }
   showTaskInfo() {
-    this.idTask = this.router.snapshot.paramMap.get("id");
+    this.idTask = this.router.snapshot.paramMap.get('id');
 
     this.database.getTaskById(this.idTask).then((task) => {
-      
+
       this.oldTaskTitle = task[0]['tittle'];
       this.oldTaskContent = task[0]['content'];
     })
@@ -52,7 +52,7 @@ export class UpdateTaskPage implements OnInit {
         newContent = this.Form.get('note').value;
       }
 
-      let task: Task = {
+      const task: Task = {
         id_task: this.idTask,
         tittle: newTitle,
         content: newContent
@@ -62,7 +62,7 @@ export class UpdateTaskPage implements OnInit {
       })
 
     } else {
-     
+
     }
 
   }
@@ -71,6 +71,10 @@ export class UpdateTaskPage implements OnInit {
     document.getElementById('updateTasks').style.display = 'block';
 
   }
-  get title() { return this.Form.get("title") }
-  get note() { return this.Form.get("note") }
+  get title() {
+    return this.Form.get('title');
+  }
+  get note() {
+    return this.Form.get('note');
+  }
 }

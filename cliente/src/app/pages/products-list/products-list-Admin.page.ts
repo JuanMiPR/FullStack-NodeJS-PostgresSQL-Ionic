@@ -10,39 +10,37 @@ import { AlertController, ToastController } from '@ionic/angular';
   styleUrls: ['./products-list-Admin.page.scss', '../../app.component.scss'],
 })
 export class ProductsListPageAdmin implements OnInit {
-  filterText: string = '';
+  filterText = '';
   products: Products[] =[];
 
-  constructor(private api: ApiService, private router: Router, private alertController: AlertController, private toastController: ToastController) {
+  constructor(private api: ApiService, private router: Router, private alertController: AlertController,
+              private toastController: ToastController) {
     this.loadProducts();
   }
   ionViewDidEnter() {
     this.loadProducts();
   }
   goToAdd() {
-    this.router.navigate(["/add-product"]);
+    this.router.navigate(['/add-product']);
   }
   loadProducts() {
     this.api.getProducts().subscribe(data => {
       this.products = data['data'];
-    }, error => {
-      
-    });
+    }, error => {});
   }
   itemDetail(id: number) {
-    this.router.navigate(["/item-details", id]);
+    this.router.navigate(['/item-details', id]);
   }
   search(event) {
-    this.filterText = event.detail.value
+    this.filterText = event.detail.value;
   }
   ngOnInit() {
   }
   updateProduct(prod: Products) {
-    this.router.navigate(["/update-product/" + prod.id_product]);
+    this.router.navigate(['/update-product/' + prod.id_product]);
   }
   deleteProduct(prod: Products) {
-    
-    this.presentAlert("¿Seguro que desea eliminar el producto?", prod.id_product);
+    this.presentAlert('¿Seguro que desea eliminar el producto?', prod.id_product);
   }
   async presentToast(msg: string) {
     const toast = await this.toastController.create({
@@ -69,9 +67,9 @@ export class ProductsListPageAdmin implements OnInit {
           handler: () => {
             this.api.deleteProduct(id).subscribe((data) => {
               this.loadProducts();
-              this.presentToast("Producto eliminado");
+              this.presentToast('Producto eliminado');
             }, error => {
-              this.presentToast("Fallo al eliminar");
+              this.presentToast('Fallo al eliminar');
             });
 
           }

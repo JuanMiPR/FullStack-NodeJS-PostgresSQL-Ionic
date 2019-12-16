@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Users } from '../../models/user.model';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
 
@@ -9,7 +8,6 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./user-details.page.scss', '../../app.component.scss'],
 })
 export class UserDetailsPage implements OnInit {
- 
   user_name: string;
   user_image: string;
   user_email:string;
@@ -22,7 +20,7 @@ export class UserDetailsPage implements OnInit {
   ngOnInit() {
   }
   getUserInfo() {
-    let idUser = this.router.snapshot.paramMap.get("id");
+    const idUser = this.router.snapshot.paramMap.get('id');
     this.api.getUserById(idUser).subscribe(data => {
 
       this.user_name = data['data']['user_name'];
@@ -32,8 +30,6 @@ export class UserDetailsPage implements OnInit {
       this.user_type = data['data']['user_type'];
 
 
-    }, error => {
-   
-    });
+    }, error => {});
   }
 }

@@ -10,13 +10,14 @@ import { DatabaseService } from '../../services/database.service';
 })
 export class AdminTasksPage implements OnInit {
   tasks: Task[] = [];
-  constructor(private menu: MenuController, private router: Router, private database: DatabaseService, private alertController: AlertController, private toastController: ToastController) {
+  constructor(private menu: MenuController, private router: Router, private database: DatabaseService,
+              private alertController: AlertController, private toastController: ToastController) {
     this.loadTasks();
   }
   ngOnInit() {
   }
   taskDetail(task: Task) {
-    this.router.navigate(["/task-details", task.id_task]);
+    this.router.navigate(['/task-details', task.id_task]);
   }
   loadTasks() {
     this.database.getTasks().then(tasks => {
@@ -38,10 +39,10 @@ export class AdminTasksPage implements OnInit {
     this.router.navigate(['/add-task']);
   }
   updateTask(task: Task) {
-    this.router.navigate(["/update-task/" + task.id_task]);
+    this.router.navigate(['/update-task/' + task.id_task]);
   }
   deleteTask(task: Task) {
-    this.presentAlert("¿Seguro que desea eliminar la tarea?", task.id_task);
+    this.presentAlert('¿Seguro que desea eliminar la tarea?', task.id_task);
   }
   async presentToast(msg: string) {
     const toast = await this.toastController.create({

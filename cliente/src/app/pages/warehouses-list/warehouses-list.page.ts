@@ -10,10 +10,10 @@ import { AlertController, ToastController } from '@ionic/angular';
   styleUrls: ['./warehouses-list.page.scss', '../../app.component.scss'],
 })
 export class WarehousesListPage implements OnInit {
-  filterText: string = '';
+  filterText = '';
   Warehouses: Warehouses[] = [];
-  constructor(private api: ApiService, private router: Router, private alertController: AlertController, private toastController: ToastController) {
-   
+  constructor(private api: ApiService, private router: Router, private alertController: AlertController,
+              private toastController: ToastController) {
   }
   ionViewDidEnter() {
     this.loadWarehouses();
@@ -21,21 +21,21 @@ export class WarehousesListPage implements OnInit {
   ngOnInit() {
   }
   goToAdd() {
-    this.router.navigate(["/add-warehouse"]);
+    this.router.navigate(['/add-warehouse']);
   }
   warehouseDetail(id: number) {
-    this.router.navigate(["/warehouse-details/", id]);
+    this.router.navigate(['/warehouse-details/', id]);
   }
   search(event) {
-    this.filterText = event.detail.value
+    this.filterText = event.detail.value;
   }
 
   updateWarehouse(warehouse: Warehouses) {
-    this.router.navigate(["/update-warehouse/" + warehouse.id_warehouse]);
+    this.router.navigate(['/update-warehouse/' + warehouse.id_warehouse]);
   }
   deleteWarehouse(warehouse: Warehouses) {
 
-    this.presentAlert("¿Seguro que desea eliminar el almacen?", warehouse.id_warehouse);
+    this.presentAlert('¿Seguro que desea eliminar el almacen?', warehouse.id_warehouse);
   }
   async presentToast(msg: string) {
     const toast = await this.toastController.create({
@@ -62,9 +62,9 @@ export class WarehousesListPage implements OnInit {
           handler: () => {
             this.api.deleteWarehouse(id).subscribe((data) => {
               this.loadWarehouses();
-              this.presentToast("Almacen eliminado");
+              this.presentToast('Almacen eliminado');
             }, error => {
-              this.presentToast("Fallo al eliminar");
+              this.presentToast('Fallo al eliminar');
             });
 
           }
@@ -77,8 +77,6 @@ export class WarehousesListPage implements OnInit {
   loadWarehouses() {
     this.api.getWarehouses().subscribe(data => {
       this.Warehouses = data['data'];
-    }, error => {
-    
-    });
+    }, error => {});
   }
 }

@@ -16,16 +16,14 @@ export class ItemDetailsPage implements OnInit {
     this.getProductInfo();
   }
   getProductInfo() {
-    let idProduct = this.router.snapshot.paramMap.get("id");
+    let idProduct = this.router.snapshot.paramMap.get('id');
     this.api.getProductbyId(idProduct).subscribe(data => {
 
       this.product_image = data['data']['product_image'];
       this.product_name = data['data']['product_name'];
       this.product_stock = data['data']['product_stock'];
 
-    }, error => {
-      
-    });
+    }, error => {});
   }
 
   ngOnInit() {

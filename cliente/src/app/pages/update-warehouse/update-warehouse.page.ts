@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
 @Component({
@@ -26,7 +26,7 @@ export class UpdateWarehousePage implements OnInit {
     })
   }
   getWarehouseInfo() {
-    this.idWarehouse = this.router.snapshot.paramMap.get("id");
+    this.idWarehouse = this.router.snapshot.paramMap.get('id');
     this.api.getWarehouseById(this.idWarehouse).subscribe(data => {
 
       this.oldWarehouseAddres = data['data']['warehouse_address'];
@@ -34,7 +34,7 @@ export class UpdateWarehousePage implements OnInit {
 
 
     }, error => {
-     
+
     });
   }
   updateForm() {
@@ -44,26 +44,26 @@ export class UpdateWarehousePage implements OnInit {
       let phone_number: string;
 
       if (this.Form.get('address').value === '') {
-        warehouse_address = this.oldWarehouseAddres
+        warehouse_address = this.oldWarehouseAddres;
       } else {
-        warehouse_address = this.Form.get('address').value
+        warehouse_address = this.Form.get('address').value;
       }
       if (this.Form.get('phoneNumber').value === '') {
-        phone_number = this.oldPhoneNumber
+        phone_number = this.oldPhoneNumber;
       } else {
-        phone_number = this.Form.get('phoneNumber').value
+        phone_number = this.Form.get('phoneNumber').value;
       }
 
-      let warehouseInfo = {
-        "warehouse_address": warehouse_address,
-        "phone_number": phone_number
+      const warehouseInfo = {
+        'warehouse_address': warehouse_address,
+        'phone_number': phone_number
       }
       this.api.updateWarehouse(this.idWarehouse, warehouseInfo).subscribe((data) => {
         this.navigate.navigate(['/home/adminPage']);
-      })
+      });
 
     } else {
-     
+
     }
 
   }
@@ -72,6 +72,10 @@ export class UpdateWarehousePage implements OnInit {
     document.getElementById('updateWarehouses').style.display = 'block';
 
   }
-  get address() { return this.Form.get("address") }
-  get phoneNumber() { return this.Form.get("phoneNumber") }
+  get address() {
+    return this.Form.get('address');
+  }
+  get phoneNumber() {
+    return this.Form.get('phoneNumber');
+  }
 }

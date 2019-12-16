@@ -25,33 +25,32 @@ export class CartPagePage implements OnInit {
     this.api.getBuyByIdBuy(id_buy).subscribe((data) => {
       if (data['data'].length === 0) {
         this.buy(id_buy);
-      }
-      else {
+      } else {
         this.getIdBuy();
       }
-    }, error => {});
+    }, error => { });
   }
   buy(id_buy) {
-    var today = new Date()
+    let today = new Date();
     let paymentType;
     const user_address = this.addressTextField;
-    let date = (today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate());
-    const user = JSON.parse(localStorage.getItem("User"));
+    let date = (today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate());
+    const user = JSON.parse(localStorage.getItem('User'));
     if (document.getElementById('Cash')['checked']) {
-      paymentType = "Efectivo";
+      paymentType = 'Efectivo';
     } else {
-      paymentType = "Tarjeta"
+      paymentType = 'Tarjeta'
     };
     if (user_address == undefined || user_address.length < 5) {
-      document.getElementById('addressError').style.display = "block";
+      document.getElementById('addressError').style.display = 'block';
     } else {
-      document.getElementById('addressError').style.display = "none";
+      document.getElementById('addressError').style.display = 'none';
       this.cartItems.forEach(element => {
-        let quantity = document.getElementById("quantity:" + element.id_product)['value'];
+        let quantity = document.getElementById('quantity:' + element.id_product)['value'];
         if (quantity == '') {
           quantity = 1;
         }
-        let buy: Buys = {
+        const buy: Buys = {
           id_buy: id_buy,
           id_user: user.user_id,
           id_product: element.id_product,
@@ -59,10 +58,10 @@ export class CartPagePage implements OnInit {
           date: date,
           payment_type: paymentType,
           user_address: user_address
-        }
+        };
         this.api.postBuy(buy).subscribe((data) => {
 
-        }, error => {});
+        }, error => { });
       });
       this.deleteBuy();
     }
@@ -75,7 +74,7 @@ export class CartPagePage implements OnInit {
   ngOnInit() {
   }
   loadCartItems() {
-    this.cartItems = JSON.parse(localStorage.getItem("cartProducts"));
+    this.cartItems = JSON.parse(localStorage.getItem('cartProducts'));
     if (this.cartItems == null) {
       this.cartItems = [];
     }

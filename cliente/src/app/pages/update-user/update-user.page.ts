@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-update-user',
   templateUrl: './update-user.page.html',
@@ -25,7 +25,7 @@ export class UpdateUserPage implements OnInit {
 
   }
   getUserInfo() {
-    this.idUser = this.router.snapshot.paramMap.get("id");
+    this.idUser = this.router.snapshot.paramMap.get('id');
     this.api.getUserById(this.idUser).subscribe(data => {
 
       this.oldUser_name = data['data']['user_name'];
@@ -35,7 +35,7 @@ export class UpdateUserPage implements OnInit {
 
 
     }, error => {
-    
+
     });
   }
   ngOnInit() {
@@ -47,7 +47,7 @@ export class UpdateUserPage implements OnInit {
 
       userRol: new FormControl('', [Validators.pattern('Admin|Normal|admin|normal')])
 
-    })
+    });
   }
   updateForm() {
 
@@ -57,24 +57,24 @@ export class UpdateUserPage implements OnInit {
       let email: string;
       let rol: string;
       if (this.Form.get('name').value === '') {
-        name = this.oldUser_name
+        name = this.oldUser_name;
       } else {
-        name = this.Form.get('name').value
+        name = this.Form.get('name').value;
       }
       if (this.Form.get('email').value === '') {
-        email = this.oldUser_email
+        email = this.oldUser_email;
       } else {
-        email = this.Form.get('email').value
+        email = this.Form.get('email').value;
       }
       if (this.Form.get('userRol').value === '') {
-        rol = this.oldUser_rol
+        rol = this.oldUser_rol;
       } else {
-        rol = this.Form.get('userRol').value
+        rol = this.Form.get('userRol').value;
       }
-      let userInfo = {
-        "user_name": name,
-        "user_rol": rol.toLowerCase(),
-        "user_email": email,
+      const userInfo = {
+        user_name: name,
+        user_rol: rol.toLowerCase(),
+        user_email: email,
       }
       this.api.updateUser(this.idUser, userInfo).subscribe((data) => {
         this.navigate.navigate(['/user-list']);
@@ -83,13 +83,19 @@ export class UpdateUserPage implements OnInit {
       })
 
     } else {
-   
+
     }
 
   }
-  get name() { return this.Form.get("name") }
+  get name() {
+    return this.Form.get('name');
+  }
 
-  get email() { return this.Form.get("email") }
-  get userRol() { return this.Form.get("userRol") }
+  get email() {
+    return this.Form.get('email');
+  }
+  get userRol() {
+    return this.Form.get('userRol');
+  }
 
 }

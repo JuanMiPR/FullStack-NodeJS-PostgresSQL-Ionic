@@ -19,15 +19,13 @@ export class WarehouseDetailsPage implements OnInit {
   ngOnInit() {
   }
   getWarehouseInfo() {
-    let idWarehouse = this.router.snapshot.paramMap.get("id");
+    const idWarehouse = this.router.snapshot.paramMap.get('id');
     this.api.getWarehouseById(idWarehouse).subscribe(data => {
 
       this.address = data['data']['warehouse_address'];
       this.phone_number = data['data']['phone_number'];
 
-    }, error => {
-      
-    });
+    }, error => {});
 
     this.api.getProductByIdWarehouse(idWarehouse).subscribe((data) => {
       this.products = data['data'];

@@ -16,7 +16,7 @@
         <ion-col>
           <ion-item style="font-size: 85%;margin-top: -5%;">
             <ion-label position="floating">Email</ion-label>
-            <ion-input inputmode="email" formControlName="email" multiple="false" [(ngModel)]="emailTextValue"
+            <ion-input inputmode="email" formControlName="email" multiple="false"
               name="email">
             </ion-input>
           </ion-item>
@@ -37,7 +37,7 @@
         <ion-col>
           <ion-item style="font-size: 85%;">
             <ion-label position="floating">Contraseña</ion-label>
-            <ion-input type="password" formControlName="password" [(ngModel)]="passwordTextValue" name="password">
+            <ion-input type="password" formControlName="password"  name="password">
             </ion-input>
           </ion-item>
           <div class="alert-danger" *ngIf="password.invalid && (password.dirty || password.touched)">

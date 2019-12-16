@@ -18,11 +18,11 @@ export class profilePage {
   constructor(private api: ApiService, private router: Router, private theme: ThemeService) {
 
     this.getUserInfo();
-    this.selected = "Normal";
+    this.selected = 'Normal';
 
   }
   selectChanged(event) {
-    let value = event.detail['value'];
+    const value = event.detail['value'];
 
     this.selected = value;
 
@@ -42,15 +42,14 @@ export class profilePage {
     });
   }
   getUserInfo() {
-    let user = JSON.parse(localStorage.getItem('User'));
+    const user = JSON.parse(localStorage.getItem('User'));
     this.api.getUserById(user['user_id']).subscribe((data) => {
-     
       this.id_user = data['data']['id_user'];
       this.imageProfile = data['data']['image_profile'];
       this.user_name = data['data']['user_name'];
       this.user_email = data['data']['user_email'];
 
-    })
+    });
   }
 
 
