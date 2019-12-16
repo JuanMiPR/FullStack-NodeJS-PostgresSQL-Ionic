@@ -6,7 +6,7 @@ import { Products } from '../../models/products.model';
 @Component({
   selector: 'app-warehouse-details',
   templateUrl: './warehouse-details.page.html',
-  styleUrls: ['./warehouse-details.page.scss'],
+  styleUrls: ['./warehouse-details.page.scss', '../../app.component.scss'],
 })
 export class WarehouseDetailsPage implements OnInit {
 
